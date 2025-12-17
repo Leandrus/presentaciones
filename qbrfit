@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Futuro de tu Gimnasio - QbrFit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #050505; color: white; }
+        
+        /* Patrón de fondo sutil */
+        .bg-pattern {
+            background-color: #050505;
+            background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        /* Mockup del Teléfono */
+        .iphone-mockup {
+            border: 12px solid #1f1f1f;
+            border-radius: 40px;
+            overflow: hidden;
+            position: relative;
+            background: #000;
+            width: 300px;
+            height: 600px;
+            margin: 0 auto;
+            box-shadow: 0 20px 50px -10px rgba(220, 38, 38, 0.3);
+            transition: all 0.5s ease;
+        }
+        .iphone-notch {
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 100px; height: 24px; background: #1f1f1f;
+            border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; z-index: 20;
+        }
+        
+        /* Animaciones */
+        .fade-in-up { animation: fadeInUp 0.8s ease-out; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pulse-btn { animation: pulseRed 2s infinite; }
+        @keyframes pulseRed {
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+
+        /* Scrollbar oculta dentro del teléfono */
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-pattern antialiased">
+
+    <!-- BARRA DE NAVEGACIÓN SIMPLE -->
+    <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10 p-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-black italic tracking-tighter">QBR<span class="text-red-600">FIT</span></h1>
+            <a href="#contacto" class="bg-white text-black text-xs font-bold px-4 py-2 rounded-full hover:bg-gray-200 transition">
+                Contactar
+            </a>
+        </div>
+    </nav>
+
+    <!-- 1. HERO SECTION (LA BIENVENIDA) -->
+    <section class="min-h-screen flex flex-col items-center justify-center text-center px-4 relative pt-20">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-red-600/20 rounded-full blur-[100px] -z-10"></div>
+        
+        <span class="text-red-500 font-bold tracking-widest text-xs uppercase mb-4 fade-in-up">La Evolución de tu Negocio</span>
+        <h1 class="text-4xl md:text-7xl font-black mb-6 leading-tight max-w-4xl fade-in-up" style="animation-delay: 0.1s">
+            Tu Gimnasio merece ser <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-white">Una Leyenda.</span>
+        </h1>
+        <p class="text-gray-400 text-lg md:text-xl max-w-2xl mb-10 fade-in-up" style="animation-delay: 0.2s">
+            Descubre cómo transformar tu centro de entrenamiento en una comunidad digital vibrante, automatizada y rentable.
+        </p>
+        
+        <a href="#gestion" class="bg-red-600 text-white font-bold py-4 px-8 rounded-full shadow-lg shadow-red-900/50 hover:bg-red-700 transition transform hover:scale-105 pulse-btn fade-in-up" style="animation-delay: 0.3s">
+            Iniciar Recorrido <i class="fas fa-arrow-down ml-2"></i>
+        </a>
+        
+        <div class="mt-12 text-gray-500 text-xs animate-bounce">
+            Desliza para descubrir
+        </div>
+    </section>
+
+    <!-- 2. GESTIÓN Y PAZ MENTAL -->
+    <section id="gestion" class="min-h-screen py-20 px-4 flex items-center bg-black/50 border-t border-white/5">
+        <div class="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center">
+            
+            <!-- Texto -->
+            <div class="order-2 md:order-1">
+                <div class="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center text-green-500 text-2xl mb-6">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">Tranquilidad Total</h2>
+                <p class="text-gray-400 text-lg mb-8">
+                    Imagina un sistema que trabaja por ti. Automatiza el acceso y los pagos para que tú te dediques a lo importante: tus clientes.
+                </p>
+
+                <div class="space-y-4">
+                    <div class="p-4 bg-zinc-900/50 rounded-xl border border-zinc-800 hover:border-green-500/50 transition cursor-pointer" onclick="updatePhone('gestion', 1)">
+                        <h3 class="font-bold text-white flex items-center gap-2">
+                            <i class="fas fa-check-circle text-green-500"></i> Ejemplo 1: Acceso Automatizado
+                        </h3>
+                        <p class="text-sm text-gray-500 mt-1 pl-6">QR digital que se desactiva si la membresía vence. Seguridad sin fricción.</p>
+                    </div>
+
+                    <div class="p-4 bg-zinc-900/50 rounded-xl border border-zinc-800 hover:border-green-500/50 transition cursor-pointer" onclick="updatePhone('gestion', 2)">
+                        <h3 class="font-bold text-white flex items-center gap-2">
+                            <i class="fas fa-wallet text-green-500"></i> Ejemplo 2: Finanzas Claras
+                        </h3>
+                        <p class="text-sm text-gray-500 mt-1 pl-6">Visualiza en tiempo real cuánto dinero entra hoy. Sin hojas de cálculo complejas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Celular -->
+            <div class="order-1 md:order-2 flex justify-center">
+                <div class="iphone-mockup">
+                    <div class="iphone-notch"></div>
+                    <div id="screen-gestion" class="h-full bg-zinc-900 pt-10 px-4 pb-4 overflow-y-auto hide-scroll flex flex-col">
+                        <!-- Contenido dinámico se carga aquí -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. COMUNIDAD (RETENCIÓN) -->
+    <section id="comunidad" class="min-h-screen py-20 px-4 flex items-center bg-zinc-900/20 border-t border-white/5">
+        <div class="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center">
+            
+            <!-- Celular (Izquierda en Desktop) -->
+            <div class="flex justify-center order-1">
+                <div class="iphone-mockup border-zinc-800 shadow-red-900/20">
+                    <div class="iphone-notch"></div>
+                    <div id="screen-comunidad" class="h-full bg-zinc-900 pt-10 px-4 pb-4 overflow-y-auto hide-scroll flex flex-col">
+                        <!-- Contenido dinámico -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Texto -->
+            <div class="order-2">
+                <div class="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center text-red-500 text-2xl mb-6">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">Una Tribu Imparable</h2>
+                <p class="text-gray-400 text-lg mb-8">
+                    La gente viene por las máquinas, pero se queda por los amigos. Creamos un sentido de pertenencia tan fuerte que nadie querrá irse.
+                </p>
+
+                <div class="space-y-4">
+                    <div class="p-4 bg-zinc-900/50 rounded-xl border border-zinc-800 hover:border-red-500/50 transition cursor-pointer" onclick="updatePhone('comunidad', 1)">
+                        <h3 class="font-bold text-white flex items-center gap-2">
+                            <i class="fas fa-heart text-red-500"></i> Ejemplo 1: Muro de Victorias
+                        </h3>
+                        <p class="text-sm text-gray-500 mt-1 pl-6">Donde los socios celebran sus logros. Un "like" de tu compañero motiva más que nada.</p>
+                    </div>
+
+                    <div class="p-4 bg-zinc-900/50 rounded-xl border border-zinc-800 hover:border-red-500/50 transition cursor-pointer" onclick="updatePhone('comunidad', 2)">
+                        <h3 class="font-bold text-white flex items-center gap-2">
+                            <i class="fas fa-trophy text-yellow-500"></i> Ejemplo 2: Liga de Gimnasios
+                        </h3>
+                        <p class="text-sm text-gray-500 mt-1 pl-6">Competencia sana contra otros gimnasios. "Ayúdanos a ser el #1 de la ciudad".</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. INGRESOS EXTRA (MARKETPLACE) -->
+    <section id="ingresos" class="min-h-screen py-20 px-4 flex items-center bg-black/50 border-t border-white/5">
+        <div class="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center">
+            
+            <!-- Texto -->
+            <div class="order-2 md:order-1">
+                <div class="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center text-blue-500 text-2xl mb-6">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">Crece sin Límites</h2>
+                <p class="text-gray-400 text-lg mb-8">
+                    Tu gimnasio tiene un horario, pero tu negocio no. Vende productos digitales y servicios las 24 horas del día.
+                </p>
+
+                <div class="space-y-4">
+                    <div class="p-4 bg-zinc-900/50 rounded-xl border border-zinc-800 hover:border-blue-500/50 transition cursor-pointer" onclick="updatePhone('ingresos', 1)">
+                        <h3 class="font-bold text-white flex items-center gap-2">
+                            <i class="fas fa-file-pdf text-blue-500"></i> Ejemplo 1: Tienda Digital
+                        </h3>
+                        <p class="text-sm text-gray-500 mt-1 pl-6">Vende guías de alimentación, rutinas en casa o retos de 30 días automáticamente.</p>
+                    </div>
+
+                    <div class="p-4 bg-zinc-900/50 rounded-xl border border-zinc-800 hover:border-blue-500/50 transition cursor-pointer" onclick="updatePhone('ingresos', 2)">
+                        <h3 class="font-bold text-white flex items-center gap-2">
+                            <i class="fas fa-calendar-check text-blue-500"></i> Ejemplo 2: Clases Premium
+                        </h3>
+                        <p class="text-sm text-gray-500 mt-1 pl-6">Reservas para sesiones especiales o seminarios pagos directamente desde la app.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Celular -->
+            <div class="order-1 md:order-2 flex justify-center">
+                <div class="iphone-mockup border-zinc-800 shadow-blue-900/20">
+                    <div class="iphone-notch"></div>
+                    <div id="screen-ingresos" class="h-full bg-zinc-900 pt-10 px-4 pb-4 overflow-y-auto hide-scroll flex flex-col">
+                        <!-- Contenido dinámico -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. FUTURO (IA GEMINI) -->
+    <section id="futuro" class="min-h-screen py-20 px-4 flex items-center bg-gradient-to-b from-black to-blue-900/10 border-t border-white/5">
+        <div class="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center">
+            
+            <!-- Celular (Izquierda) -->
+            <div class="flex justify-center order-1">
+                <div class="iphone-mockup border-blue-500/30 shadow-blue-500/30">
+                    <div class="iphone-notch"></div>
+                    <div id="screen-futuro" class="h-full bg-zinc-900 pt-10 px-4 pb-4 overflow-y-auto hide-scroll flex flex-col">
+                        <!-- Contenido dinámico -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Texto -->
+            <div class="order-2">
+                <div class="inline-block bg-blue-600/20 text-blue-400 text-xs font-bold px-3 py-1 rounded-full mb-4 border border-blue-500/30">
+                    Potenciado por Google Gemini
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">Tu Asistente del Futuro</h2>
+                <p class="text-gray-400 text-lg mb-8">
+                    La Inteligencia Artificial no es ciencia ficción, es tu nueva herramienta para deleitar a tus clientes y predecir el futuro de tu negocio.
+                </p>
+
+                <div class="space-y-4">
+                    <div class="p-4 bg-zinc-900/50 rounded-xl border border-zinc-800 hover:border-purple-500/50 transition cursor-pointer" onclick="updatePhone('futuro', 1)">
+                        <h3 class="font-bold text-white flex items-center gap-2">
+                            <i class="fas fa-camera text-purple-500"></i> Ejemplo 1: NutriSnap (Visión)
+                        </h3>
+                        <p class="text-sm text-gray-500 mt-1 pl-6">El cliente toma foto a su comida y la IA calcula calorías y macros al instante. Magia pura.</p>
+                    </div>
+
+                    <div class="p-4 bg-zinc-900/50 rounded-xl border border-zinc-800 hover:border-purple-500/50 transition cursor-pointer" onclick="updatePhone('futuro', 2)">
+                        <h3 class="font-bold text-white flex items-center gap-2">
+                            <i class="fas fa-crystal-ball text-purple-500"></i> Ejemplo 2: Oráculo de Retención
+                        </h3>
+                        <p class="text-sm text-gray-500 mt-1 pl-6">La IA te avisa: "Carlos está en riesgo de irse". Y te redacta el mensaje perfecto para recuperarlo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER / CTA FINAL -->
+    <section id="contacto" class="py-24 bg-black text-center px-4 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
+        <div class="relative z-10 max-w-2xl mx-auto">
+            <h2 class="text-4xl font-black mb-6">¿Listo para el siguiente nivel?</h2>
+            <p class="text-gray-400 mb-8">
+                Lleva a tu gimnasio a la era digital. Fideliza, monetiza y automatiza con QbrFit.
+            </p>
+            <button class="bg-white text-black font-bold py-4 px-10 rounded-full hover:bg-gray-200 transition transform hover:scale-105 shadow-xl">
+                Agendar Demo Personalizada
+            </button>
+            <p class="mt-8 text-xs text-gray-600">© 2024 QbrFit System. Todos los derechos reservados.</p>
+        </div>
+    </section>
+
+    <!-- JAVASCRIPT PARA LA INTERACTIVIDAD -->
+    <script>
+        // --- BASE DE DATOS DE PANTALLAS ---
+        const screens = {
+            gestion: {
+                1: `
+                <div class="flex flex-col h-full animate-fade-in">
+                    <div class="text-center mb-6 mt-4">
+                        <div class="w-16 h-16 bg-gradient-to-tr from-green-500 to-green-700 rounded-full mx-auto flex items-center justify-center shadow-lg shadow-green-900/50 mb-3">
+                            <i class="fas fa-check text-3xl text-white"></i>
+                        </div>
+                        <h3 class="font-bold text-xl">Acceso Permitido</h3>
+                        <p class="text-xs text-gray-400">Carlos Rodriguez</p>
+                    </div>
+                    
+                    <div class="bg-zinc-800 p-4 rounded-xl border border-green-500/30 mb-4 text-center">
+                        <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-2">QR DINÁMICO</p>
+                        <div class="bg-white p-2 rounded-lg w-32 h-32 mx-auto mb-2">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=AccessGranted" class="w-full h-full">
+                        </div>
+                        <p class="text-xs text-green-500 font-bold"><i class="fas fa-circle text-[8px] mr-1"></i> Membresía Activa</p>
+                    </div>
+                    
+                    <div class="bg-zinc-800 p-4 rounded-xl border border-zinc-700">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs text-gray-400">Vence:</span>
+                            <span class="text-sm font-bold text-white">15 Octubre</span>
+                        </div>
+                        <div class="w-full bg-zinc-700 h-1 rounded-full overflow-hidden">
+                            <div class="bg-green-500 w-3/4 h-full"></div>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-1 text-right">20 días restantes</p>
+                    </div>
+                </div>
+                `,
+                2: `
+                <div class="flex flex-col h-full animate-fade-in">
+                    <div class="flex justify-between items-center mb-6 mt-2">
+                        <h3 class="font-bold text-lg">Panel Dueño</h3>
+                        <div class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center text-xs">YO</div>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-zinc-800 to-zinc-900 p-5 rounded-2xl border-l-4 border-green-500 mb-4 shadow-lg">
+                        <p class="text-[10px] text-gray-400 uppercase font-bold mb-1">Ingresos Hoy</p>
+                        <p class="text-3xl font-black text-white">$450.00</p>
+                        <div class="flex items-center gap-1 mt-2 text-green-500 text-xs">
+                            <i class="fas fa-arrow-up"></i> 15% vs ayer
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 mb-4">
+                        <div class="bg-zinc-800 p-3 rounded-xl border border-zinc-700">
+                            <p class="text-[10px] text-gray-400 uppercase">Activos</p>
+                            <p class="text-xl font-bold">142</p>
+                        </div>
+                        <div class="bg-zinc-800 p-3 rounded-xl border border-zinc-700">
+                            <p class="text-[10px] text-gray-400 uppercase">Aforo</p>
+                            <p class="text-xl font-bold text-blue-400">34 <span class="text-xs text-gray-500">/ 80</span></p>
+                        </div>
+                    </div>
+
+                    <div class="bg-zinc-800 p-4 rounded-xl border border-zinc-700 flex-1">
+                        <p class="text-xs font-bold text-gray-400 mb-3 uppercase">Últimos Accesos</p>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-white">Maria G.</span>
+                                <span class="bg-green-900 text-green-400 px-2 py-0.5 rounded">Entrada</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-white">Pedro P.</span>
+                                <span class="bg-red-900 text-red-400 px-2 py-0.5 rounded">Denegado</span>
+                            </div>
+                             <div class="flex justify-between items-center text-xs opacity-50">
+                                <span class="text-white">Luis A.</span>
+                                <span class="bg-green-900 text-green-400 px-2 py-0.5 rounded">Entrada</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `
+            },
+            comunidad: {
+                1: `
+                <div class="flex flex-col h-full animate-fade-in">
+                    <div class="bg-gradient-to-r from-red-900 to-black p-4 rounded-b-2xl mb-4 -mx-4 -mt-10 pt-14 border-b border-red-800">
+                        <p class="text-xs text-red-300 font-bold uppercase tracking-wider mb-1">Muro de la Tribu</p>
+                        <h3 class="text-xl font-black italic">QBRFIT SOCIAL</h3>
+                    </div>
+
+                    <!-- Post -->
+                    <div class="bg-zinc-800 p-4 rounded-2xl border border-zinc-700 mb-4">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center font-bold text-xs">JC</div>
+                            <div>
+                                <p class="text-sm font-bold text-white">Juan Carlos</p>
+                                <p class="text-[10px] text-gray-500">Hace 2 horas</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-300 mb-3">¡Rompí mi récord personal! 100kg en Sentadilla 🔥 Gracias coach.</p>
+                        <div class="h-32 bg-black rounded-lg mb-3 flex items-center justify-center text-gray-600">
+                            <i class="fas fa-play-circle text-3xl"></i>
+                        </div>
+                        <div class="flex gap-4 border-t border-white/5 pt-2">
+                            <button class="text-red-500 text-xs font-bold"><i class="fas fa-fire"></i> 24 Fuego</button>
+                            <button class="text-gray-400 text-xs"><i class="fas fa-comment"></i> 5 Comentarios</button>
+                        </div>
+                    </div>
+
+                    <!-- Post 2 -->
+                    <div class="bg-zinc-800 p-4 rounded-2xl border border-zinc-700 opacity-60">
+                         <div class="flex items-center gap-3 mb-2">
+                            <div class="w-8 h-8 bg-pink-600 rounded-full flex items-center justify-center font-bold text-xs">AN</div>
+                            <div>
+                                <p class="text-sm font-bold text-white">Ana Maria</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-300">Lista para la clase de Zumba 💃</p>
+                    </div>
+                </div>
+                `,
+                2: `
+                <div class="flex flex-col h-full animate-fade-in">
+                     <div class="text-center mb-6 mt-4">
+                        <i class="fas fa-trophy text-4xl text-yellow-500 mb-2 drop-shadow-lg"></i>
+                        <h3 class="font-black text-2xl italic text-white">LIGA REGIONAL</h3>
+                        <p class="text-xs text-gray-400">Compite por tu gimnasio</p>
+                    </div>
+
+                    <div class="bg-zinc-800 p-5 rounded-2xl border border-yellow-500/30 text-center mb-6 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-yellow-500"></div>
+                        <p class="text-[10px] text-gray-400 uppercase font-bold mb-1">Posición Actual</p>
+                        <p class="text-5xl font-black text-white mb-1">#2</p>
+                        <p class="text-sm font-bold text-red-500">QbrFit Quíbor</p>
+                        <div class="mt-3 bg-black/40 rounded-full py-1 px-3 text-[10px] inline-block text-gray-300">
+                            🚀 A solo 140 pts del 1ro
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="flex items-center p-3 bg-zinc-900 rounded-xl border border-zinc-800 opacity-50">
+                            <span class="font-bold text-gray-500 w-6">1</span>
+                            <span class="text-sm flex-1">Spartan Gym</span>
+                            <span class="text-xs font-bold text-yellow-500">9800 pts</span>
+                        </div>
+                         <div class="flex items-center p-3 bg-red-900/20 rounded-xl border border-red-600 transform scale-105 shadow-lg">
+                            <span class="font-bold text-white w-6">2</span>
+                            <span class="text-sm flex-1 font-bold text-white">Tu Gimnasio</span>
+                            <span class="text-xs font-bold text-white">9660 pts</span>
+                        </div>
+                         <div class="flex items-center p-3 bg-zinc-900 rounded-xl border border-zinc-800 opacity-50">
+                            <span class="font-bold text-gray-500 w-6">3</span>
+                            <span class="text-sm flex-1">Iron House</span>
+                            <span class="text-xs font-bold text-gray-500">6200 pts</span>
+                        </div>
+                    </div>
+                </div>
+                `
+            },
+            ingresos: {
+                1: `
+                <div class="flex flex-col h-full animate-fade-in">
+                    <div class="flex justify-between items-center mb-4 mt-2">
+                        <h3 class="font-bold text-lg"><i class="fas fa-shopping-bag text-red-500 mr-2"></i>Tienda</h3>
+                        <span class="bg-zinc-800 text-[10px] px-2 py-1 rounded text-gray-300">Saldo: 450 pts</span>
+                    </div>
+
+                    <!-- Hero Product -->
+                    <div class="relative h-48 bg-gradient-to-br from-red-900 to-black rounded-2xl p-5 flex flex-col justify-center border border-red-700 mb-6 shadow-xl group cursor-pointer">
+                        <div class="absolute top-2 right-2 bg-yellow-500 text-black text-[8px] font-bold px-2 py-1 rounded">POPULAR</div>
+                        <h3 class="text-2xl font-bold text-white leading-tight w-3/4 mb-1">Reto Abdomen de Acero</h3>
+                        <p class="text-xs text-red-200 mb-4">Coach Miguel • PDF + Video</p>
+                        <div class="mt-auto flex justify-between items-center">
+                            <span class="text-xl font-bold text-white">$12.99</span>
+                            <button class="bg-white text-black text-xs font-bold px-3 py-1.5 rounded-lg shadow hover:bg-gray-200">Comprar</button>
+                        </div>
+                    </div>
+
+                    <p class="text-xs font-bold text-gray-500 uppercase mb-3">Más productos</p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-zinc-800 p-3 rounded-xl border border-zinc-700 hover:border-gray-500 cursor-pointer">
+                            <div class="h-20 bg-black rounded-lg mb-2 flex items-center justify-center text-gray-600"><i class="fas fa-book"></i></div>
+                            <p class="text-xs font-bold text-white truncate">Recetas Keto</p>
+                            <p class="text-xs text-red-500 font-bold">$8.00</p>
+                        </div>
+                        <div class="bg-zinc-800 p-3 rounded-xl border border-zinc-700 hover:border-gray-500 cursor-pointer">
+                            <div class="h-20 bg-black rounded-lg mb-2 flex items-center justify-center text-gray-600"><i class="fas fa-video"></i></div>
+                            <p class="text-xs font-bold text-white truncate">Glúteos en Casa</p>
+                            <p class="text-xs text-red-500 font-bold">$15.00</p>
+                        </div>
+                    </div>
+                </div>
+                `,
+                2: `
+                <div class="flex flex-col h-full animate-fade-in">
+                    <div class="flex justify-between items-center mb-6 mt-2">
+                        <h3 class="font-bold text-lg">Agenda de Clases</h3>
+                        <i class="fas fa-calendar-alt text-gray-500"></i>
+                    </div>
+
+                    <div class="bg-zinc-800 p-4 rounded-xl border-l-4 border-red-600 mb-4 relative overflow-hidden">
+                        <div class="absolute top-2 right-2 bg-red-600/20 text-red-500 text-[8px] font-bold px-2 py-1 rounded border border-red-600/30">PREMIUM</div>
+                        <p class="text-xs text-gray-400 mb-1">Sábado, 10:00 AM</p>
+                        <h3 class="font-bold text-white text-lg mb-1">Seminario Nutrición</h3>
+                        <p class="text-xs text-gray-300 mb-3">Aprende a contar macros con la Nutri Ana.</p>
+                        <div class="flex justify-between items-center border-t border-white/5 pt-3">
+                            <span class="font-bold text-white">$20.00</span>
+                            <button class="bg-red-600 text-white text-xs font-bold px-4 py-1.5 rounded-lg">Reservar Cupo</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-zinc-800 p-4 rounded-xl border-l-4 border-blue-500 mb-4 opacity-75">
+                         <p class="text-xs text-gray-400 mb-1">Domingo, 09:00 AM</p>
+                        <h3 class="font-bold text-white text-lg mb-1">Masterclass Yoga</h3>
+                        <p class="text-xs text-gray-300 mb-3">Clase avanzada de flexibilidad.</p>
+                         <div class="flex justify-between items-center border-t border-white/5 pt-3">
+                            <span class="font-bold text-white">$15.00</span>
+                            <button class="bg-zinc-700 text-gray-400 text-xs font-bold px-4 py-1.5 rounded-lg cursor-not-allowed">Agotado</button>
+                        </div>
+                    </div>
+                </div>
+                `
+            },
+            futuro: {
+                1: `
+                <div class="flex flex-col h-full animate-fade-in relative">
+                    <div class="absolute inset-0 bg-blue-500/5 pointer-events-none"></div>
+                    <div class="text-center mb-6 mt-4">
+                        <span class="bg-blue-600 text-[8px] font-bold text-white px-2 py-1 rounded mb-2 inline-block">GEMINI VISION AI</span>
+                        <h3 class="font-bold text-xl">NutriSnap</h3>
+                        <p class="text-xs text-gray-400">Toma una foto, obtén tus macros.</p>
+                    </div>
+
+                    <div class="bg-zinc-800 p-5 rounded-2xl border border-blue-500/30 shadow-lg shadow-blue-900/20 relative overflow-hidden mb-4">
+                        <!-- Simulated Camera View -->
+                        <div class="bg-black rounded-xl h-40 mb-3 border border-zinc-700 flex items-center justify-center relative">
+                            <i class="fas fa-utensils text-4xl text-gray-600"></i>
+                            <div class="absolute inset-0 border-2 border-blue-500/50 rounded-xl animate-pulse"></div>
+                            <div class="absolute bottom-2 left-2 bg-black/70 text-blue-400 text-[8px] px-2 py-1 rounded backdrop-blur">
+                                <i class="fas fa-sparkles mr-1"></i> Analizando...
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center border-b border-white/5 pb-2">
+                                <span class="text-sm text-white">Pollo a la Plancha</span>
+                                <span class="text-xs font-bold text-blue-400">25g Prot</span>
+                            </div>
+                             <div class="flex justify-between items-center border-b border-white/5 pb-2">
+                                <span class="text-sm text-white">Arroz Blanco</span>
+                                <span class="text-xs font-bold text-blue-400">40g Carbs</span>
+                            </div>
+                             <div class="flex justify-between items-center">
+                                <span class="text-sm font-bold text-white">Total Calorías</span>
+                                <span class="text-sm font-bold text-green-400">450 kcal</span>
+                            </div>
+                        </div>
+                        <button class="w-full bg-blue-600 text-white text-xs font-bold py-2 rounded-lg mt-4 hover:bg-blue-700 transition">Registrar Comida</button>
+                    </div>
+                </div>
+                `,
+                2: `
+                 <div class="flex flex-col h-full animate-fade-in relative">
+                    <div class="bg-zinc-900 border-b border-zinc-800 p-4 -mx-4 -mt-10 pt-14 mb-4">
+                        <h3 class="font-bold text-lg flex items-center gap-2"><i class="fas fa-robot text-purple-500"></i> Oráculo IA</h3>
+                        <p class="text-xs text-gray-400">Panel del Dueño</p>
+                    </div>
+
+                    <div class="bg-red-900/10 border border-red-500/30 p-4 rounded-xl mb-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-red-400 uppercase tracking-wide">Alerta de Riesgo</span>
+                            <span class="bg-red-600 text-white text-[10px] px-2 py-0.5 rounded-full animate-pulse">Alta Prioridad</span>
+                        </div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center font-bold text-gray-500">PP</div>
+                            <div>
+                                <p class="font-bold text-white">Pedro Perez</p>
+                                <p class="text-[10px] text-gray-400">Asistencia bajó 80% este mes.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- AI Suggestion -->
+                        <div class="bg-black/50 p-3 rounded-lg border border-purple-500/20 relative">
+                            <div class="absolute -top-2 left-3 text-purple-400 text-[10px] bg-zinc-900 px-1"><i class="fas fa-magic mr-1"></i>Sugerencia Gemini</div>
+                            <p class="text-xs text-gray-300 italic mb-2">
+                                "Hola Pedro, te extrañamos. 💪 Te regalo un batido si vienes antes del viernes. ¿Te animas?"
+                            </p>
+                            <button class="w-full bg-green-600 text-white text-[10px] font-bold py-1.5 rounded hover:bg-green-700">
+                                Enviar WhatsApp (1-Clic)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                `
+            }
+        };
+
+        // Función para inyectar HTML en los celulares
+        function updatePhone(sectionId, exampleId) {
+            const screen = document.getElementById(`screen-${sectionId}`);
+            if (screen && screens[sectionId][exampleId]) {
+                // Pequeño efecto de fade
+                screen.style.opacity = '0';
+                setTimeout(() => {
+                    screen.innerHTML = screens[sectionId][exampleId];
+                    screen.style.opacity = '1';
+                }, 200);
+            }
+        }
+
+        // Cargar contenido inicial al abrir
+        window.onload = () => {
+            updatePhone('gestion', 1);
+            updatePhone('comunidad', 1);
+            updatePhone('ingresos', 1);
+            updatePhone('futuro', 1);
+        };
+        
+        // Animaciones simples al hacer scroll (Intersection Observer)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                    entry.target.style.opacity = 1;
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Observar elementos si quisieramos animar más cosas al scroll
+        // document.querySelectorAll('.animate-on-scroll').forEach((el) => observer.observe(el));
+
+    </script>
+</body>
+</html>
