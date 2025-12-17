@@ -1,1052 +1,763 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Historia de tu Nuevo Gimnasio - QbrFit</title>
+    <title>QbrFit - El Futuro de tu Gimnasio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #050505; color: white; }
+        body { font-family: 'Inter', sans-serif; background-color: #050505; color: white; overflow-x: hidden; }
         
-        /* Patrón de fondo sutil */
+        /* Fondo con patrón sutil */
         .bg-pattern {
             background-color: #050505;
             background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
             background-size: 30px 30px;
         }
 
-        /* Separador visual para móviles */
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            margin: 2rem 0;
+        /* Borde Grueso solicitado */
+        .section-separator {
+            border-bottom: 5px solid #dc2626; /* Rojo intenso */
         }
 
-        /* Mockup del Teléfono */
+        /* Mockup del Teléfono Ampliado */
         .iphone-mockup {
-            border: 12px solid #1f1f1f;
-            border-radius: 40px;
+            border: 14px solid #1f1f1f;
+            border-radius: 45px;
             overflow: hidden;
             position: relative;
             background: #000;
-            width: 300px;
-            height: 620px;
+            width: 100%;
+            max-width: 380px; /* Más ancho */
+            height: 750px;    /* Más alto */
             margin: 0 auto;
-            box-shadow: 0 20px 50px -10px rgba(220, 38, 38, 0.3);
+            box-shadow: 0 25px 60px -15px rgba(220, 38, 38, 0.25);
             transition: all 0.5s ease;
         }
         .iphone-notch {
             position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 100px; height: 24px; background: #1f1f1f;
-            border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; z-index: 20;
-        }
-        
-        /* Animaciones */
-        .fade-in-up { animation: fadeInUp 0.8s ease-out; }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .pulse-btn { animation: pulseRed 2s infinite; }
-        @keyframes pulseRed {
-            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+            width: 120px; height: 28px; background: #1f1f1f;
+            border-bottom-left-radius: 14px; border-bottom-right-radius: 14px; z-index: 30;
         }
 
         /* Scrollbar oculta dentro del teléfono */
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Estilo para listas de módulos */
-        .module-check {
-            color: #4ade80; /* green-400 */
-            margin-right: 0.5rem;
+        /* Animaciones de Transición */
+        .slide-in { animation: slideIn 0.5s ease-out forwards; opacity: 0; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(5px);
         }
     </style>
 </head>
-<body class="bg-pattern antialiased selection:bg-red-900 selection:text-white">
+<body class="bg-pattern min-h-screen flex flex-col">
 
-    <!-- BARRA DE NAVEGACIÓN -->
-    <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10 p-4">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-black italic tracking-tighter">QBR<span class="text-red-600">FIT</span></h1>
-            <a href="#contacto" class="bg-white text-black text-xs font-bold px-4 py-2 rounded-full hover:bg-gray-200 transition">
-                Contactar
-            </a>
-        </div>
+    <!-- HEADER: Logo Link al Inicio -->
+    <nav class="fixed top-0 w-full z-50 bg-black/90 backdrop-blur-md border-b border-zinc-800 h-16 flex items-center justify-center">
+        <a href="javascript:location.reload()" class="text-2xl font-black italic tracking-tighter hover:scale-105 transition cursor-pointer" title="Reiniciar Presentación">
+            QBR<span class="text-red-600">FIT</span>
+        </a>
     </nav>
 
-    <!-- 1. HERO SECTION -->
-    <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 relative pt-20 border-b border-zinc-800">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-red-600/10 rounded-full blur-[120px] -z-10"></div>
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="flex-1 pt-16 relative">
         
-        <span class="text-red-500 font-bold tracking-widest text-xs uppercase mb-4 fade-in-up border border-red-900/50 px-3 py-1 rounded-full bg-red-900/10">El Software Integral 2024</span>
-        <h1 class="text-4xl md:text-7xl font-black mb-6 leading-tight max-w-5xl fade-in-up" style="animation-delay: 0.1s">
-            Convierte tu Gimnasio en una <br class="hidden md:block">
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-white">Máquina de Comunidad.</span>
-        </h1>
-        <p class="text-gray-400 text-lg md:text-xl max-w-2xl mb-10 fade-in-up leading-relaxed" style="animation-delay: 0.2s">
-            Más que un software de gestión. Es el ecosistema donde tus clientes entrenan, compiten, compran y se enamoran de tu marca.
-        </p>
-        
-        <a href="#gestion" class="bg-red-600 text-white font-bold py-4 px-10 rounded-full shadow-lg shadow-red-900/50 hover:bg-red-700 transition transform hover:scale-105 pulse-btn fade-in-up flex items-center gap-2" style="animation-delay: 0.3s">
-            Ver la Historia <i class="fas fa-arrow-down"></i>
-        </a>
-    </section>
-
-    <!-- 2. GESTIÓN (HISTORIA DE PAZ MENTAL) -->
-    <section id="gestion" class="py-32 px-6 flex items-center bg-black border-t-4 border-zinc-900 relative">
-        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-red-900 to-transparent opacity-50"></div>
-        
-        <div class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-16 items-center">
+        <!-- SECCIÓN 1: INTRODUCCIÓN -->
+        <section id="step-0" class="step-section min-h-screen flex flex-col items-center justify-center text-center px-6 section-separator relative">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-red-600/10 rounded-full blur-[100px] -z-10"></div>
             
-            <!-- Texto Narrativo -->
-            <div class="order-2 md:order-1">
-                <div class="w-14 h-14 bg-zinc-900 rounded-2xl flex items-center justify-center text-green-500 text-3xl mb-8 border border-zinc-800 shadow-lg shadow-green-900/10">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                
-                <h2 class="text-3xl md:text-5xl font-bold mb-6 text-white">Capítulo 1: Paz Mental</h2>
-                
-                <div class="prose prose-invert mb-8 text-gray-400 leading-relaxed">
-                    <p class="mb-4">
-                        <strong class="text-white">Imagina esto:</strong> Es día 15 y no tienes que perseguir a nadie para cobrar. 
-                        Juan llega a la entrada, escanea su celular y el torno se abre en verde. María, que olvidó pagar, ve una luz roja y un mensaje amable en su app para renovar al instante.
-                    </p>
-                    <p>
-                        Tú estás en casa, revisando tu teléfono, viendo en tiempo real cuánto dinero entró hoy sin haber estado en recepción ni un minuto. <span class="text-green-400 font-bold">Control total, esfuerzo cero.</span>
-                    </p>
-                </div>
-
-                <div class="bg-zinc-900/30 p-6 rounded-2xl border border-zinc-800 mb-8">
-                    <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Módulos Incluidos</h4>
-                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-300">
-                        <li><i class="fas fa-check module-check"></i> Control de Acceso QR</li>
-                        <li><i class="fas fa-check module-check"></i> Pagos Recurrentes</li>
-                        <li><i class="fas fa-check module-check"></i> Dashboard Financiero</li>
-                        <li><i class="fas fa-check module-check"></i> CRM de Clientes</li>
-                        <li><i class="fas fa-check module-check"></i> Bloqueo de Deudores</li>
-                        <li><i class="fas fa-check module-check"></i> Reportes Exportables</li>
-                    </ul>
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <div class="p-4 bg-zinc-900 rounded-xl border border-zinc-700 hover:border-green-500 cursor-pointer transition flex items-center gap-3" onclick="updatePhone('gestion', 1)">
-                        <i class="fas fa-qrcode text-green-500 text-xl"></i>
-                        <div>
-                            <span class="block font-bold text-sm text-white">Escenario: Acceso</span>
-                            <span class="text-xs text-gray-500">Lo que ve el cliente al entrar</span>
-                        </div>
-                    </div>
-                    <div class="p-4 bg-zinc-900 rounded-xl border border-zinc-700 hover:border-green-500 cursor-pointer transition flex items-center gap-3" onclick="updatePhone('gestion', 2)">
-                        <i class="fas fa-chart-pie text-green-500 text-xl"></i>
-                        <div>
-                            <span class="block font-bold text-sm text-white">Escenario: Finanzas</span>
-                            <span class="text-xs text-gray-500">Lo que ves tú como dueño</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Celular -->
-            <div class="order-1 md:order-2 flex justify-center relative">
-                <div class="absolute -inset-4 bg-green-500/20 blur-3xl rounded-full opacity-20"></div>
-                <div class="iphone-mockup">
-                    <div class="iphone-notch"></div>
-                    <div id="screen-gestion" class="h-full bg-zinc-900 pt-10 px-4 pb-4 overflow-y-auto hide-scroll flex flex-col"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. ENTRENAMIENTO (ADIÓS AL PAPEL) -->
-    <section id="entrenamiento" class="py-32 px-6 flex items-center bg-zinc-900/30 border-t border-white/5 relative">
-        <div class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-16 items-center">
+            <span class="text-red-500 font-bold tracking-widest text-xs uppercase mb-6 border border-red-900/50 px-4 py-1 rounded-full bg-red-900/10 animate-pulse">Propuesta Integral 2024</span>
             
-            <!-- Celular (Izquierda) -->
-            <div class="flex justify-center order-1 relative">
-                <div class="absolute -inset-4 bg-orange-500/20 blur-3xl rounded-full opacity-20"></div>
-                <div class="iphone-mockup border-zinc-800 shadow-orange-900/20">
-                    <div class="iphone-notch"></div>
-                    <div id="screen-entrenamiento" class="h-full bg-zinc-900 pt-10 px-4 pb-4 overflow-y-auto hide-scroll flex flex-col"></div>
-                </div>
-            </div>
-
-            <!-- Texto -->
-            <div class="order-2">
-                <div class="w-14 h-14 bg-zinc-900 rounded-2xl flex items-center justify-center text-orange-500 text-3xl mb-8 border border-zinc-800 shadow-lg shadow-orange-900/10">
-                    <i class="fas fa-dumbbell"></i>
-                </div>
-                
-                <h2 class="text-3xl md:text-5xl font-bold mb-6 text-white">Capítulo 2: Adiós al Papel</h2>
-                
-                <div class="prose prose-invert mb-8 text-gray-400 leading-relaxed">
-                    <p class="mb-4">
-                        <strong class="text-white">La escena clásica:</strong> Un cliente nuevo deambula perdido con una hoja de papel arrugada. Se siente ignorado y no vuelve.
-                    </p>
-                    <p>
-                        <strong class="text-white">Con QbrFit:</strong> Su rutina está en el celular con videos. Reserva su clase de Spinning desde el sofá el domingo por la noche. Sabe exactamente qué hacer y siente que tiene un entrenador personal digital 24/7. <span class="text-orange-400 font-bold">Profesionalismo que retiene.</span>
-                    </p>
-                </div>
-
-                <div class="bg-black/40 p-6 rounded-2xl border border-zinc-800 mb-8">
-                    <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Funcionalidades Clave</h4>
-                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-300">
-                        <li><i class="fas fa-check module-check"></i> Agenda de Clases</li>
-                        <li><i class="fas fa-check module-check"></i> Reservas en Línea</li>
-                        <li><i class="fas fa-check module-check"></i> Rutinas Digitales (Video)</li>
-                        <li><i class="fas fa-check module-check"></i> Registro de Pesos (Log)</li>
-                        <li><i class="fas fa-check module-check"></i> Historial de Progreso</li>
-                        <li><i class="fas fa-check module-check"></i> Listas de Espera Automáticas</li>
-                    </ul>
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <div class="p-4 bg-zinc-900 rounded-xl border border-zinc-700 hover:border-orange-500 cursor-pointer transition flex items-center gap-3" onclick="updatePhone('entrenamiento', 1)">
-                        <i class="fas fa-calendar-check text-orange-500 text-xl"></i>
-                        <div>
-                            <span class="block font-bold text-sm text-white">Ver Agenda</span>
-                            <span class="text-xs text-gray-500">Reservar clases</span>
-                        </div>
-                    </div>
-                    <div class="p-4 bg-zinc-900 rounded-xl border border-zinc-700 hover:border-orange-500 cursor-pointer transition flex items-center gap-3" onclick="updatePhone('entrenamiento', 2)">
-                        <i class="fas fa-clipboard-list text-orange-500 text-xl"></i>
-                        <div>
-                            <span class="block font-bold text-sm text-white">Ver Rutina</span>
-                            <span class="text-xs text-gray-500">Entrenamiento digital</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. COMUNIDAD (RETENCIÓN) -->
-    <section id="comunidad" class="py-32 px-6 flex items-center bg-black border-t border-white/5 relative">
-        <div class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-16 items-center">
+            <h1 class="text-4xl md:text-7xl font-black mb-8 leading-tight max-w-5xl">
+                ¿Imaginas un gimnasio que <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-white">funciona solo?</span>
+            </h1>
             
-            <!-- Texto -->
-            <div class="order-2 md:order-1">
-                <div class="w-14 h-14 bg-zinc-900 rounded-2xl flex items-center justify-center text-red-600 text-3xl mb-8 border border-zinc-800 shadow-lg shadow-red-900/10">
-                    <i class="fas fa-users"></i>
-                </div>
-                
-                <h2 class="text-3xl md:text-5xl font-bold mb-6 text-white">Capítulo 3: La Tribu</h2>
-                
-                <div class="prose prose-invert mb-8 text-gray-400 leading-relaxed">
-                    <p class="mb-4">
-                        <strong class="text-white">El secreto de la retención:</strong> Nadie deja un lugar donde están sus amigos. Creamos una red social interna donde cada gota de sudor cuenta.
-                    </p>
-                    <p>
-                        Pedro sube su récord personal. 20 personas de TU gimnasio le dan "fuego". Pedro se siente un héroe.
-                        Además, tu gimnasio compite en la <strong>Liga Regional</strong>. Tus clientes no faltan a entrenar porque "tenemos que ganarle al gimnasio de la otra cuadra". <span class="text-red-500 font-bold">Lealtad tribal pura.</span>
-                    </p>
-                </div>
-
-                <div class="bg-zinc-900/30 p-6 rounded-2xl border border-zinc-800 mb-8">
-                    <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Módulos Sociales</h4>
-                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-300">
-                        <li><i class="fas fa-check module-check"></i> Feed Social Privado</li>
-                        <li><i class="fas fa-check module-check"></i> Reacciones y Comentarios</li>
-                        <li><i class="fas fa-check module-check"></i> Ranking de Asistencia</li>
-                        <li><i class="fas fa-check module-check"></i> Liga Inter-Gimnasios</li>
-                        <li><i class="fas fa-check module-check"></i> Perfiles de Atleta</li>
-                        <li><i class="fas fa-check module-check"></i> Eventos y Retos</li>
-                    </ul>
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <div class="p-4 bg-zinc-900 rounded-xl border border-zinc-700 hover:border-red-600 cursor-pointer transition flex items-center gap-3" onclick="updatePhone('comunidad', 1)">
-                        <i class="fas fa-comments text-red-600 text-xl"></i>
-                        <div>
-                            <span class="block font-bold text-sm text-white">Red Social</span>
-                            <span class="text-xs text-gray-500">Interacción interna</span>
-                        </div>
-                    </div>
-                    <div class="p-4 bg-zinc-900 rounded-xl border border-zinc-700 hover:border-red-600 cursor-pointer transition flex items-center gap-3" onclick="updatePhone('comunidad', 2)">
-                        <i class="fas fa-trophy text-red-600 text-xl"></i>
-                        <div>
-                            <span class="block font-bold text-sm text-white">La Liga</span>
-                            <span class="text-xs text-gray-500">Competencia Gamificada</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Celular -->
-            <div class="order-1 md:order-2 flex justify-center relative">
-                <div class="absolute -inset-4 bg-red-600/20 blur-3xl rounded-full opacity-20"></div>
-                <div class="iphone-mockup border-zinc-800 shadow-red-900/20">
-                    <div class="iphone-notch"></div>
-                    <div id="screen-comunidad" class="h-full bg-zinc-900 pt-10 px-4 pb-4 overflow-y-auto hide-scroll flex flex-col"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. EXPERIENCIA (ROCKOLA Y WIKI) -->
-    <section id="experiencia" class="py-32 px-6 flex items-center bg-zinc-900/30 border-t border-white/5 relative">
-        <div class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-16 items-center">
-            
-            <!-- Celular (Izquierda) -->
-            <div class="flex justify-center order-1 relative">
-                <div class="absolute -inset-4 bg-purple-500/20 blur-3xl rounded-full opacity-20"></div>
-                <div class="iphone-mockup border-zinc-800 shadow-purple-900/20">
-                    <div class="iphone-notch"></div>
-                    <div id="screen-experiencia" class="h-full bg-zinc-900 pt-10 px-4 pb-4 overflow-y-auto hide-scroll flex flex-col"></div>
-                </div>
-            </div>
-
-            <!-- Texto -->
-            <div class="order-2">
-                <div class="w-14 h-14 bg-zinc-900 rounded-2xl flex items-center justify-center text-purple-500 text-3xl mb-8 border border-zinc-800 shadow-lg shadow-purple-900/10">
-                    <i class="fas fa-magic"></i>
-                </div>
-                
-                <h2 class="text-3xl md:text-5xl font-bold mb-6 text-white">Capítulo 4: El Vibe</h2>
-                
-                <div class="prose prose-invert mb-8 text-gray-400 leading-relaxed">
-                    <p class="mb-4">
-                        <strong class="text-white">Problema real:</strong> "La música está fea", "No sé usar esa máquina y me da pena preguntar". Pequeñas fricciones que alejan al cliente.
-                    </p>
-                    <p>
-                        <strong class="text-white">Solución QbrFit:</strong> Creamos una <strong>Rockola Colaborativa</strong> donde los usuarios gastan puntos (que ganan entrenando) para poner su música favorita.
-                        Y si no saben usar una máquina, escanean el QR pegado en ella y ven un video de 15 segundos. <span class="text-purple-400 font-bold">Autonomía y diversión.</span>
-                    </p>
-                </div>
-
-                <div class="bg-black/40 p-6 rounded-2xl border border-zinc-800 mb-8">
-                    <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Herramientas de Experiencia</h4>
-                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-300">
-                        <li><i class="fas fa-check module-check"></i> Rockola (Votación Musical)</li>
-                        <li><i class="fas fa-check module-check"></i> Escáner QR de Equipos</li>
-                        <li><i class="fas fa-check module-check"></i> Wiki de Ejercicios</li>
-                        <li><i class="fas fa-check module-check"></i> Club de Beneficios Local</li>
-                        <li><i class="fas fa-check module-check"></i> Sistema de Puntos (Gamificación)</li>
-                    </ul>
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <div class="p-4 bg-zinc-900 rounded-xl border border-zinc-700 hover:border-purple-500 cursor-pointer transition flex items-center gap-3" onclick="updatePhone('experiencia', 1)">
-                        <i class="fas fa-music text-purple-500 text-xl"></i>
-                        <div>
-                            <span class="block font-bold text-sm text-white">Rockola</span>
-                            <span class="text-xs text-gray-500">Ellos eligen la música</span>
-                        </div>
-                    </div>
-                    <div class="p-4 bg-zinc-900 rounded-xl border border-zinc-700 hover:border-purple-500 cursor-pointer transition flex items-center gap-3" onclick="updatePhone('experiencia', 2)">
-                        <i class="fas fa-qrcode text-purple-500 text-xl"></i>
-                        <div>
-                            <span class="block font-bold text-sm text-white">Wiki QR</span>
-                            <span class="text-xs text-gray-500">Educación automática</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. INGRESOS EXTRA (MARKETPLACE) -->
-    <section id="ingresos" class="py-32 px-6 flex items-center bg-black border-t border-white/5 relative">
-        <div class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-16 items-center">
-            
-            <!-- Texto -->
-            <div class="order-2 md:order-1">
-                <div class="w-14 h-14 bg-zinc-900 rounded-2xl flex items-center justify-center text-blue-500 text-3xl mb-8 border border-zinc-800 shadow-lg shadow-blue-900/10">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                
-                <h2 class="text-3xl md:text-5xl font-bold mb-6 text-white">Capítulo 5: Negocio 24/7</h2>
-                
-                <div class="prose prose-invert mb-8 text-gray-400 leading-relaxed">
-                    <p class="mb-4">
-                        <strong class="text-white">Tu gimnasio tiene horario, tu app no.</strong> Mientras tú duermes, un usuario compra la "Guía de Ayuno Intermitente" de tu nutrióloga y otro reserva un seminario de fin de semana.
-                    </p>
-                    <p>
-                        Conviértete en un <strong>Marketplace Digital</strong>. Tus entrenadores suben contenido, tú pones la plataforma, y ambos ganan dinero automáticamente. <span class="text-blue-500 font-bold">Ingresos pasivos reales.</span>
-                    </p>
-                </div>
-
-                <div class="bg-zinc-900/30 p-6 rounded-2xl border border-zinc-800 mb-8">
-                    <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Módulos de Monetización</h4>
-                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-300">
-                        <li><i class="fas fa-check module-check"></i> Tienda de Infoproductos (PDF/Video)</li>
-                        <li><i class="fas fa-check module-check"></i> Venta de Suplementos (Click&Collect)</li>
-                        <li><i class="fas fa-check module-check"></i> Reservas de Clases Premium</li>
-                        <li><i class="fas fa-check module-check"></i> Gestión de Comisiones Automática</li>
-                        <li><i class="fas fa-check module-check"></i> Pasarela de Pagos Integrada</li>
-                    </ul>
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <div class="p-4 bg-zinc-900 rounded-xl border border-zinc-700 hover:border-blue-500 cursor-pointer transition flex items-center gap-3" onclick="updatePhone('ingresos', 1)">
-                        <i class="fas fa-file-invoice-dollar text-blue-500 text-xl"></i>
-                        <div>
-                            <span class="block font-bold text-sm text-white">Tienda Digital</span>
-                            <span class="text-xs text-gray-500">Venta de guías/retos</span>
-                        </div>
-                    </div>
-                    <div class="p-4 bg-zinc-900 rounded-xl border border-zinc-700 hover:border-blue-500 cursor-pointer transition flex items-center gap-3" onclick="updatePhone('ingresos', 2)">
-                        <i class="fas fa-star text-blue-500 text-xl"></i>
-                        <div>
-                            <span class="block font-bold text-sm text-white">Eventos Pago</span>
-                            <span class="text-xs text-gray-500">Seminarios y Masterclasses</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Celular -->
-            <div class="order-1 md:order-2 flex justify-center relative">
-                <div class="absolute -inset-4 bg-blue-500/20 blur-3xl rounded-full opacity-20"></div>
-                <div class="iphone-mockup border-zinc-800 shadow-blue-900/20">
-                    <div class="iphone-notch"></div>
-                    <div id="screen-ingresos" class="h-full bg-zinc-900 pt-10 px-4 pb-4 overflow-y-auto hide-scroll flex flex-col"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 7. FUTURO (IA GEMINI) -->
-    <section id="futuro" class="py-32 px-6 flex items-center bg-gradient-to-b from-black to-blue-900/10 border-t border-white/5 relative">
-        <div class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-16 items-center">
-            
-            <!-- Celular (Izquierda) -->
-            <div class="flex justify-center order-1 relative">
-                <div class="absolute -inset-4 bg-indigo-500/20 blur-3xl rounded-full opacity-20"></div>
-                <div class="iphone-mockup border-blue-500/30 shadow-blue-500/30">
-                    <div class="iphone-notch"></div>
-                    <div id="screen-futuro" class="h-full bg-zinc-900 pt-10 px-4 pb-4 overflow-y-auto hide-scroll flex flex-col"></div>
-                </div>
-            </div>
-
-            <!-- Texto -->
-            <div class="order-2">
-                <div class="inline-block bg-blue-600/20 text-blue-400 text-xs font-bold px-3 py-1 rounded-full mb-6 border border-blue-500/30">
-                    <i class="fas fa-robot mr-2"></i>Potenciado por Google Gemini
-                </div>
-                <h2 class="text-3xl md:text-5xl font-bold mb-6 text-white">Capítulo 6: El Oráculo</h2>
-                
-                <div class="prose prose-invert mb-8 text-gray-400 leading-relaxed">
-                    <p class="mb-4">
-                        <strong class="text-white">La magia de la IA:</strong> Imagina un asistente que vigila a tus clientes. 
-                        Detecta que "Carlos" bajó su asistencia un 80% y te avisa: <em class="text-white">"Riesgo de cancelación alto"</em>.
-                    </p>
-                    <p>
-                        No solo te avisa, <strong>redacta el mensaje perfecto</strong> para recuperarlo. Además, tus clientes pueden tomar foto a su comida y la IA les dice las calorías al instante. <span class="text-indigo-400 font-bold">Tecnología de 2030, hoy.</span>
-                    </p>
-                </div>
-
-                <div class="bg-black/40 p-6 rounded-2xl border border-zinc-800 mb-8">
-                    <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Inteligencia Artificial</h4>
-                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-300">
-                        <li><i class="fas fa-check module-check"></i> NutriSnap (Visión Artificial)</li>
-                        <li><i class="fas fa-check module-check"></i> Chatbot Entrenador 24/7</li>
-                        <li><i class="fas fa-check module-check"></i> Predicción de Abandono (Churn)</li>
-                        <li><i class="fas fa-check module-check"></i> Redactor de Mensajes Automático</li>
-                        <li><i class="fas fa-check module-check"></i> Análisis de Sentimiento Social</li>
-                    </ul>
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <div class="p-4 bg-zinc-900 rounded-xl border border-zinc-700 hover:border-indigo-500 cursor-pointer transition flex items-center gap-3" onclick="updatePhone('futuro', 1)">
-                        <i class="fas fa-camera text-indigo-500 text-xl"></i>
-                        <div>
-                            <span class="block font-bold text-sm text-white">NutriSnap</span>
-                            <span class="text-xs text-gray-500">Contador calorías visual</span>
-                        </div>
-                    </div>
-                    <div class="p-4 bg-zinc-900 rounded-xl border border-zinc-700 hover:border-indigo-500 cursor-pointer transition flex items-center gap-3" onclick="updatePhone('futuro', 2)">
-                        <i class="fas fa-brain text-indigo-500 text-xl"></i>
-                        <div>
-                            <span class="block font-bold text-sm text-white">Oráculo</span>
-                            <span class="text-xs text-gray-500">Predicción de bajas</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER / CTA FINAL -->
-    <section id="contacto" class="py-32 bg-black text-center px-4 relative overflow-hidden border-t border-zinc-800">
-        <div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
-        <div class="relative z-10 max-w-2xl mx-auto">
-            <span class="text-red-600 font-bold tracking-widest text-sm uppercase mb-4 block">El momento es ahora</span>
-            <h2 class="text-4xl md:text-5xl font-black mb-8 text-white leading-tight">¿Estás listo para tener <br>el mejor gimnasio de la ciudad?</h2>
-            <p class="text-gray-400 mb-10 text-lg">
-                Deja de luchar contra la corriente. Automatiza, fideliza y crece con QbrFit.
+            <p class="text-gray-400 text-lg md:text-2xl max-w-3xl mb-12 leading-relaxed">
+                Olvídate del estrés operativo. Te presentamos el ecosistema diseñado para fidelizar a tu comunidad, automatizar tus cobros y multiplicar tus ingresos.
             </p>
-            <button class="bg-white text-black font-bold py-5 px-12 rounded-full hover:bg-gray-200 transition transform hover:scale-105 shadow-2xl text-lg">
-                Quiero una Demo Gratis
+            
+            <button onclick="nextStep()" class="bg-red-600 text-white font-bold py-5 px-12 rounded-full shadow-lg shadow-red-900/50 hover:bg-red-700 transition transform hover:scale-105 text-lg flex items-center gap-3">
+                Comenzar el Recorrido <i class="fas fa-arrow-right"></i>
             </button>
-            <p class="mt-12 text-xs text-gray-600">© 2024 QbrFit System. Todos los derechos reservados.</p>
+        </section>
+
+        <!-- PLANTILLA DINÁMICA PARA LAS SECCIONES -->
+        <!-- Las secciones se llenan y muestran con JS para controlar el flujo -->
+        <div id="dynamic-container"></div>
+
+    </main>
+
+    <!-- MODAL DE INFORMACIÓN (Historias) -->
+    <div id="info-modal" class="fixed inset-0 z-[60] hidden modal-overlay flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-zinc-900 border border-zinc-700 rounded-3xl max-w-2xl w-full p-8 relative shadow-2xl transform scale-95 transition-transform duration-300" id="modal-content">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white bg-zinc-800 w-8 h-8 rounded-full flex items-center justify-center transition">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="flex items-center gap-4 mb-6">
+                <div id="modal-icon" class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl bg-zinc-800 text-red-500"></div>
+                <h3 id="modal-title" class="text-2xl font-bold text-white">Titulo del Módulo</h3>
+            </div>
+            
+            <div id="modal-body" class="prose prose-invert text-gray-300 leading-relaxed text-lg">
+                <!-- Contenido dinámico -->
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-zinc-800 flex justify-end">
+                <button onclick="closeModal()" class="bg-white text-black font-bold py-2 px-6 rounded-lg hover:bg-gray-200 transition">
+                    Entendido, ¡Me gusta!
+                </button>
+            </div>
         </div>
-    </section>
+    </div>
 
-    <!-- JAVASCRIPT -->
+    <!-- DATA Y LÓGICA -->
     <script>
-        // --- BASE DE DATOS DE PANTALLAS ---
-        const screens = {
-            gestion: {
-                1: `
-                <div class="flex flex-col h-full animate-fade-in-up">
-                    <div class="text-center mb-6 mt-6">
-                        <div class="w-20 h-20 bg-gradient-to-tr from-green-500 to-green-700 rounded-full mx-auto flex items-center justify-center shadow-lg shadow-green-900/50 mb-4 animate-pulse">
-                            <i class="fas fa-check text-4xl text-white"></i>
-                        </div>
-                        <h3 class="font-bold text-2xl text-white">Acceso Permitido</h3>
-                        <p class="text-sm text-gray-400">Bienvenido, Carlos</p>
-                    </div>
-                    
-                    <div class="bg-zinc-800 p-6 rounded-2xl border border-green-500/30 mb-6 text-center shadow-xl">
-                        <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-3 font-bold">TU LLAVE DIGITAL</p>
-                        <div class="bg-white p-3 rounded-xl w-40 h-40 mx-auto mb-3 shadow-inner">
-                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=AccessGranted" class="w-full h-full">
-                        </div>
-                        <p class="text-xs text-green-500 font-bold bg-green-900/20 py-1 px-3 rounded-full inline-block"><i class="fas fa-circle text-[6px] mr-1 align-middle"></i> Membresía Activa</p>
-                    </div>
-                    
-                    <div class="bg-zinc-800 p-5 rounded-2xl border border-zinc-700">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-xs text-gray-400 font-bold uppercase">Estado de Cuenta</span>
-                        </div>
-                        <div class="flex justify-between items-end">
-                            <div>
-                                <p class="text-xs text-gray-400">Vence:</p>
-                                <p class="text-lg font-bold text-white">15 Octubre</p>
-                            </div>
-                            <div class="text-right">
-                                <p class="text-xs text-gray-400">Días restantes:</p>
-                                <p class="text-lg font-bold text-green-400">20 días</p>
-                            </div>
-                        </div>
-                        <div class="w-full bg-zinc-700 h-1.5 rounded-full overflow-hidden mt-3">
-                            <div class="bg-green-500 w-2/3 h-full rounded-full"></div>
-                        </div>
-                    </div>
-                </div>
+        // --- CONTENIDO DE LA PRESENTACIÓN ---
+        const steps = [
+            {
+                id: 'gestion',
+                title: 'Tranquilidad Financiera',
+                subtitle: 'Automatización & Acceso',
+                icon: 'fa-shield-alt',
+                color: 'green',
+                story: `
+                    <p class="mb-4 text-gray-300">
+                        <strong class="text-white">El Escenario Ideal:</strong> Es día 15 del mes. En un gimnasio normal, estarías estresado enviando mensajes de WhatsApp cobrando a morosos.
+                    </p>
+                    <p class="mb-4 text-gray-300">
+                        <strong class="text-white">Con QbrFit:</strong> Estás tomando un café tranquilo. El sistema ya le avisó a tus clientes 3 días antes de forma automática. 
+                        Al llegar al gimnasio, <em>Juan</em> escanea su código QR en el torno. Luz Verde: Acceso concedido. 
+                        <em>María</em> olvidó pagar: Luz Roja. Pero no te preocupes, la App le permite pagar ahí mismo en 10 segundos y entrar sin que tengas que intervenir.
+                    </p>
+                    <p class="text-green-400 font-bold">Cero fricción, cero conversaciones incómodas, 100% de recaudación.</p>
                 `,
-                2: `
-                <div class="flex flex-col h-full animate-fade-in-up">
-                    <div class="flex justify-between items-center mb-8 mt-4">
-                        <div>
-                            <p class="text-xs text-gray-500 uppercase font-bold">Modo Administrador</p>
-                            <h3 class="font-bold text-xl text-white">Resumen Diario</h3>
-                        </div>
-                        <div class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center border border-gray-700 shadow-lg">
-                            <i class="fas fa-user-shield text-gray-400"></i>
-                        </div>
-                    </div>
-
-                    <div class="bg-gradient-to-br from-zinc-800 to-black p-6 rounded-3xl border-l-4 border-green-500 mb-6 shadow-xl">
-                        <p class="text-xs text-gray-400 uppercase font-bold mb-2 tracking-wider">Ingresos Hoy</p>
-                        <p class="text-4xl font-black text-white mb-2">$450.00</p>
-                        <div class="flex items-center gap-2">
-                            <span class="bg-green-500/10 text-green-500 text-xs font-bold px-2 py-1 rounded"><i class="fas fa-arrow-up"></i> 15%</span>
-                            <span class="text-xs text-gray-500">vs. ayer</span>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-4 mb-6">
-                        <div class="bg-zinc-900 p-4 rounded-2xl border border-zinc-800">
-                            <div class="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-500 mb-2"><i class="fas fa-users"></i></div>
-                            <p class="text-[10px] text-gray-400 uppercase font-bold">Activos</p>
-                            <p class="text-xl font-bold text-white">142</p>
-                        </div>
-                        <div class="bg-zinc-900 p-4 rounded-2xl border border-zinc-800">
-                             <div class="w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 mb-2"><i class="fas fa-door-open"></i></div>
-                            <p class="text-[10px] text-gray-400 uppercase font-bold">Aforo Real</p>
-                            <p class="text-xl font-bold text-white">34 <span class="text-xs text-gray-500 font-normal">/ 80</span></p>
-                        </div>
-                    </div>
-
-                    <div class="bg-zinc-900 p-5 rounded-2xl border border-zinc-800 flex-1">
-                        <p class="text-xs font-bold text-gray-400 mb-4 uppercase tracking-wider">Últimos Accesos</p>
-                        <div class="space-y-4">
-                            <div class="flex justify-between items-center text-sm border-b border-zinc-800 pb-2">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-2 h-2 rounded-full bg-green-500"></div>
-                                    <span class="text-white font-medium">Maria G.</span>
+                modules: [
+                    { 
+                        name: 'Control de Acceso QR', 
+                        icon: 'fa-qrcode', 
+                        desc: 'El teléfono de tu cliente es su llave. Generamos códigos QR dinámicos que cambian cada 30 segundos para evitar que se los pasen a amigos. Si la membresía no está pagada, el QR simplemente no abre el torno. Seguridad total sin esfuerzo.' 
+                    },
+                    { 
+                        name: 'Cobranza Automática', 
+                        icon: 'fa-file-invoice-dollar', 
+                        desc: 'Olvídate de cobrar. El sistema envía recordatorios amables y profesionales por ti: "Tu plan vence mañana, renuévalo aquí". Estadísticamente, esto aumenta la recaudación puntual un 30% porque elimina el "se me olvidó".' 
+                    },
+                    { 
+                        name: 'Dashboard en Vivo', 
+                        icon: 'fa-chart-line', 
+                        desc: 'Imagina estar en la playa y abrir tu celular para ver: "¿Cuánta gente está entrenando ahora mismo?" y "¿Cuánto dinero entró en la caja hoy?". QbrFit te da el control total de tu negocio en tiempo real, estés donde estés.' 
+                    }
+                ],
+                phoneContent: `
+                    <div class="h-full bg-zinc-900 pt-12 px-5 pb-5 overflow-y-auto hide-scroll flex flex-col">
+                        <div class="flex justify-between items-center mb-8">
+                            <div>
+                                <h3 class="font-bold text-2xl text-white">Hola, Carlos</h3>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                    <span class="text-xs text-green-500 font-bold uppercase">Acceso Permitido</span>
                                 </div>
-                                <span class="text-xs text-gray-500">10:42 AM</span>
                             </div>
-                            <div class="flex justify-between items-center text-sm border-b border-zinc-800 pb-2">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-2 h-2 rounded-full bg-red-500"></div>
-                                    <span class="text-white font-medium">Pedro P. (Deuda)</span>
-                                </div>
-                                <span class="text-xs text-red-500 font-bold">DENEGADO</span>
+                            <div class="w-12 h-12 bg-zinc-800 rounded-full flex items-center justify-center font-bold border border-zinc-700">CR</div>
+                        </div>
+
+                        <div class="bg-gradient-to-b from-green-900/20 to-zinc-900 p-8 rounded-3xl border border-green-500/30 text-center mb-6 shadow-2xl relative overflow-hidden group cursor-pointer hover:border-green-500 transition-colors">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-green-500"></div>
+                            <p class="text-xs text-gray-400 uppercase tracking-widest mb-4 font-bold">Tu Llave Digital</p>
+                            <div class="bg-white p-3 rounded-2xl w-48 h-48 mx-auto mb-4 shadow-inner">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=QbrFitAccess" class="w-full h-full opacity-90">
                             </div>
-                             <div class="flex justify-between items-center text-sm">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-2 h-2 rounded-full bg-green-500"></div>
-                                    <span class="text-white font-medium">Luis A.</span>
-                                </div>
-                                <span class="text-xs text-gray-500">10:35 AM</span>
+                            <p class="text-sm text-green-400 font-bold">Válido por: 59s</p>
+                        </div>
+
+                        <div class="bg-zinc-800 p-5 rounded-2xl border border-zinc-700">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-gray-400">Plan Mensual</span>
+                                <span class="bg-green-500/20 text-green-400 text-xs px-2 py-1 rounded">Pagado</span>
                             </div>
+                            <div class="w-full bg-black h-2 rounded-full overflow-hidden">
+                                <div class="bg-green-500 w-3/4 h-full rounded-full"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-2 text-right">Renueva en 12 días</p>
                         </div>
                     </div>
-                </div>
                 `
             },
-            entrenamiento: {
-                 1: `
-                <div class="flex flex-col h-full animate-fade-in-up">
-                    <div class="flex justify-between items-center mb-6 mt-4">
-                        <h3 class="font-bold text-xl text-white">Agenda de Clases</h3>
-                        <i class="fas fa-calendar-alt text-orange-500 text-xl"></i>
-                    </div>
-
-                    <div class="bg-zinc-800 p-1 rounded-xl flex mb-6">
-                        <button class="flex-1 bg-zinc-600 text-white text-xs font-bold py-2 rounded-lg shadow">Hoy</button>
-                        <button class="flex-1 text-gray-400 text-xs font-bold py-2">Mañana</button>
-                        <button class="flex-1 text-gray-400 text-xs font-bold py-2">Sáb</button>
-                    </div>
-
-                    <div class="space-y-4">
-                        <!-- Class Card -->
-                        <div class="bg-zinc-900 p-4 rounded-2xl border-l-4 border-orange-500 flex gap-4 items-center shadow-lg">
-                            <div class="text-center min-w-[3rem]">
-                                <p class="font-black text-white text-lg">09:00</p>
-                                <p class="text-[10px] text-gray-500 uppercase">AM</p>
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-bold text-orange-400 text-sm">CrossFit WOD</p>
-                                <p class="text-xs text-gray-400 mb-2">Coach Miguel</p>
-                                <div class="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden">
-                                    <div class="bg-orange-500 w-3/4 h-full"></div>
-                                </div>
-                                <p class="text-[10px] text-gray-500 mt-1 text-right">4 lugares disponibles</p>
-                            </div>
-                            <button class="bg-orange-600 text-white text-[10px] font-bold px-3 py-2 rounded-lg shadow hover:bg-orange-500 transition">Reservar</button>
-                        </div>
-
-                        <!-- Class Card Full -->
-                         <div class="bg-zinc-900 p-4 rounded-2xl border-l-4 border-gray-600 flex gap-4 items-center opacity-60">
-                            <div class="text-center min-w-[3rem]">
-                                <p class="font-black text-white text-lg">18:00</p>
-                                <p class="text-[10px] text-gray-500 uppercase">PM</p>
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-bold text-white text-sm">Zumba</p>
-                                <p class="text-xs text-gray-400 mb-1">Coach Sarah</p>
-                                <span class="bg-zinc-700 text-[10px] text-white px-2 py-0.5 rounded">Lista de Espera</span>
-                            </div>
-                            <button class="bg-zinc-700 text-gray-400 text-[10px] font-bold px-3 py-2 rounded-lg cursor-not-allowed">Lleno</button>
-                        </div>
-                    </div>
-                </div>
+            {
+                id: 'entrenamiento',
+                title: 'Experiencia Profesional',
+                subtitle: 'Rutinas & Clases',
+                icon: 'fa-dumbbell',
+                color: 'orange',
+                story: `
+                    <p class="mb-4 text-gray-300">
+                        <strong class="text-white">El Problema Común:</strong> Un cliente nuevo llega y se siente perdido. El entrenador está ocupado con otro. El cliente da dos vueltas, se siente ignorado y se va para no volver.
+                    </p>
+                    <p class="mb-4 text-gray-300">
+                        <strong class="text-white">La Solución QbrFit:</strong> Ese cliente abre su App. ¡Sorpresa! Ahí está su rutina del "Día 1", asignada por tu staff. 
+                        No sabe hacer sentadilla, así que toca el video y aprende la técnica en 10 segundos. Se siente un experto.
+                        Más tarde, desde su sofá, reserva su cupo para la clase de Spinning de mañana.
+                    </p>
+                    <p class="text-orange-400 font-bold">Tus clientes se sienten cuidados, guiados y tratados como profesionales.</p>
                 `,
-                2: `
-                 <div class="flex flex-col h-full animate-fade-in-up">
-                    <div class="text-center mb-6 mt-4">
-                        <h3 class="font-bold text-xl text-white">Rutina de Hoy</h3>
-                        <p class="text-xs text-orange-500 font-bold uppercase tracking-widest">Día 1: Pierna de Poder</p>
-                    </div>
-
-                    <div class="flex-1 space-y-4 overflow-y-auto pr-2">
-                        <!-- Exercise 1 -->
-                        <div class="bg-zinc-900 p-4 rounded-2xl border border-zinc-800">
-                            <div class="flex justify-between items-start mb-3">
-                                <div>
-                                    <h4 class="font-bold text-white text-sm">Sentadilla Libre</h4>
-                                    <p class="text-[10px] text-gray-500">4 Series x 10 Reps</p>
+                modules: [
+                    { 
+                        name: 'Rutinas Digitales con Video', 
+                        icon: 'fa-play-circle', 
+                        desc: 'Adiós a las hojas de papel sudadas y perdidas. El cliente ve el ejercicio, ve el video explicativo, anota su peso y guarda su progreso. Tú ahorras papel y ellos aman la tecnología.' 
+                    },
+                    { 
+                        name: 'Reservas de Clases', 
+                        icon: 'fa-calendar-check', 
+                        desc: 'Optimiza el espacio de tus salas. El cliente reserva su lugar desde la app. Si la clase está llena, entra en una lista de espera automática que le avisa si se libera un cupo. Cero caos, cero quejas.' 
+                    },
+                    { 
+                        name: 'Historial de Progreso', 
+                        icon: 'fa-chart-bar', 
+                        desc: 'Nada motiva más que ver resultados. La app le muestra gráficas visuales: "Has aumentado tu fuerza un 20% este mes". Esto valida el precio de tu mensualidad cada vez que lo ven.' 
+                    }
+                ],
+                phoneContent: `
+                    <div class="h-full bg-zinc-900 pt-12 px-5 pb-5 overflow-y-auto hide-scroll flex flex-col">
+                        <h3 class="font-bold text-2xl text-white mb-6">Tu Agenda Hoy</h3>
+                        
+                        <!-- Clase Card -->
+                        <div class="bg-zinc-800 p-4 rounded-2xl border-l-4 border-orange-500 mb-6 shadow-lg flex gap-4 items-center">
+                            <div class="text-center min-w-[3.5rem]">
+                                <p class="font-black text-white text-xl">09:00</p>
+                                <p class="text-[10px] text-gray-500 font-bold uppercase">AM</p>
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-bold text-orange-400 text-lg">CrossFit WOD</p>
+                                <p class="text-xs text-gray-400 mb-2">Coach Miguel • Sala A</p>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-full bg-black h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-orange-500 w-3/4 h-full"></div>
+                                    </div>
+                                    <span class="text-[10px] text-gray-500 whitespace-nowrap">4 libres</span>
                                 </div>
-                                <button class="text-orange-500 text-xs flex items-center gap-1 bg-orange-900/10 px-2 py-1 rounded-lg hover:bg-orange-900/30"><i class="fas fa-play"></i> Video</button>
+                            </div>
+                            <button class="bg-orange-600 text-white text-xs font-bold px-4 py-3 rounded-xl shadow-lg hover:bg-orange-500 transition">Reservado</button>
+                        </div>
+
+                        <h3 class="font-bold text-xl text-white mb-4">Rutina: Hipertrofia</h3>
+                        <div class="space-y-3">
+                            <div class="bg-black p-4 rounded-2xl border border-zinc-800 hover:border-orange-500/50 transition">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h4 class="font-bold text-white">1. Sentadilla Libre</h4>
+                                    <span class="text-xs text-blue-400 flex items-center gap-1 cursor-pointer"><i class="fas fa-play"></i> Video</span>
+                                </div>
+                                <div class="flex gap-2">
+                                    <input type="text" value="80kg" class="bg-zinc-900 border border-zinc-700 text-center w-full rounded py-2 text-sm text-white">
+                                    <input type="text" value="10 reps" class="bg-zinc-900 border border-zinc-700 text-center w-full rounded py-2 text-sm text-white">
+                                    <button class="bg-green-600 text-white w-12 rounded-lg flex items-center justify-center"><i class="fas fa-check"></i></button>
+                                </div>
+                            </div>
+                             <div class="bg-black p-4 rounded-2xl border border-zinc-800 opacity-70">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h4 class="font-bold text-white">2. Press de Banca</h4>
+                                </div>
+                                <div class="flex gap-2">
+                                    <div class="bg-zinc-900 w-full h-8 rounded border border-zinc-800"></div>
+                                    <div class="bg-zinc-900 w-full h-8 rounded border border-zinc-800"></div>
+                                    <div class="bg-zinc-800 w-12 h-8 rounded"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 'comunidad',
+                title: 'Comunidad Tribal',
+                subtitle: 'Retención por Pertenencia',
+                icon: 'fa-users',
+                color: 'red',
+                story: `
+                    <p class="mb-4 text-gray-300">
+                        <strong class="text-white">El Secreto de la Retención:</strong> La gente deja los gimnasios porque se aburre o se siente sola. Pero nadie abandona a su "tribu".
+                    </p>
+                    <p class="mb-4 text-gray-300">
+                        <strong class="text-white">Con QbrFit:</strong> Creamos una Red Social exclusiva para TU gimnasio. 
+                        Pedro sube su foto levantando 100kg. 20 compañeros le dan "Fuego" 🔥 y comentan "¡Buena esa!". Pedro se siente importante y validado.
+                        Además, tu gimnasio compite en la <strong>Liga Regional</strong> contra otros. Tus clientes no faltan a entrenar porque "tenemos que ganarle al gimnasio de la otra cuadra".
+                    </p>
+                    <p class="text-red-500 font-bold">Fidelización a través del orgullo, la competencia sana y la amistad.</p>
+                `,
+                modules: [
+                    { 
+                        name: 'Red Social Interna', 
+                        icon: 'fa-comments', 
+                        desc: 'Un feed estilo Instagram pero solo de fitness y solo para tus miembros. Un espacio seguro para publicar logros, fotos de entrenamiento y darse motivación mutua.' 
+                    },
+                    { 
+                        name: 'Liga de Gimnasios', 
+                        icon: 'fa-trophy', 
+                        desc: 'Gamificación pura. Tu gimnasio suma puntos por asistencia promedio y logros. Tus clientes se empujan unos a otros para subir en el ranking de la ciudad. El sentido de pertenencia se dispara.' 
+                    },
+                    { 
+                        name: 'Perfil de Atleta', 
+                        icon: 'fa-id-card', 
+                        desc: 'Cada usuario tiene su perfil con medallas virtuales por constancia, récords personales y nivel de actividad. ¡A todos les gusta presumir sus logros!' 
+                    }
+                ],
+                phoneContent: `
+                    <div class="h-full bg-zinc-900 pt-12 px-5 pb-5 overflow-y-auto hide-scroll flex flex-col">
+                        
+                        <!-- Ranking Card -->
+                        <div class="bg-gradient-to-r from-red-900 to-black p-6 rounded-3xl border border-red-600 text-center mb-8 shadow-xl relative overflow-hidden">
+                            <div class="absolute -right-4 -top-4 text-red-800 opacity-20"><i class="fas fa-trophy text-9xl"></i></div>
+                            <p class="text-xs text-red-300 uppercase tracking-widest font-bold mb-1">Liga Regional Lara</p>
+                            <h2 class="text-6xl font-black text-white italic mb-1">#2</h2>
+                            <p class="text-lg font-bold text-white mb-3">QbrFit Quíbor</p>
+                            <div class="bg-black/40 rounded-full px-4 py-2 inline-block text-xs text-gray-300 border border-white/10">
+                                🚀 ¡A 140 pts del 1er lugar!
+                            </div>
+                        </div>
+
+                        <h3 class="font-bold text-lg text-white mb-4 ml-1">Muro de la Tribu</h3>
+                        
+                        <!-- Social Post -->
+                        <div class="bg-black p-5 rounded-3xl border border-zinc-800 shadow-lg">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center font-bold text-white">MA</div>
+                                <div>
+                                    <p class="text-sm font-bold text-white">Marcos "Bestia"</p>
+                                    <p class="text-xs text-gray-500">Hace 2 horas • Pecho</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-300 mb-4 leading-relaxed">
+                                ¡Por fin salieron los 120kg! 🔥 Gracias al coach por el spot y a la comunidad por el apoyo. #PR #NoPainNoGain
+                            </p>
+                            <div class="h-48 bg-zinc-800 rounded-2xl flex items-center justify-center text-gray-600 mb-4 relative overflow-hidden border border-zinc-700">
+                                <i class="fas fa-play-circle text-5xl text-white opacity-80 hover:scale-110 transition duration-300"></i>
+                            </div>
+                            <div class="flex gap-6 border-t border-zinc-800 pt-3">
+                                <button class="text-red-500 text-xs font-bold flex items-center gap-2"><i class="fas fa-fire text-lg"></i> 42</button>
+                                <button class="text-gray-400 text-xs flex items-center gap-2"><i class="far fa-comment-alt text-lg"></i> 8</button>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 'marketplace',
+                title: 'Ingresos 24/7',
+                subtitle: 'Monetización & Venta',
+                icon: 'fa-shopping-cart',
+                color: 'blue',
+                story: `
+                    <p class="mb-4 text-gray-300">
+                        <strong class="text-white">La Oportunidad:</strong> Tu gimnasio físico tiene un horario de cierre, pero tu negocio digital no debería tenerlo.
+                    </p>
+                    <p class="mb-4 text-gray-300">
+                        <strong class="text-white">Con QbrFit:</strong> Tu negocio está abierto en la nube las 24 horas. 
+                        A las 11 PM, un usuario compra el "Reto de Abdominales en Casa" (PDF) de tu entrenador. 
+                        A las 7 AM, otro compra un pote de proteína para retirar luego.
+                        Tus entrenadores crean contenido, tú pones la plataforma, y <strong class="text-blue-400">ambos ganan comisiones automáticamente</strong>.
+                    </p>
+                    <p class="text-blue-400 font-bold">Convierte tu gym en un Marketplace digital con ingresos pasivos.</p>
+                `,
+                modules: [
+                    { 
+                        name: 'Tienda de Infoproductos', 
+                        icon: 'fa-file-download', 
+                        desc: 'Vende guías PDF, planes de alimentación o videos exclusivos. El sistema entrega el archivo automáticamente al comprador. Tú recibes el dinero sin mover un dedo.' 
+                    },
+                    { 
+                        name: 'Click & Collect', 
+                        icon: 'fa-shopping-bag', 
+                        desc: 'Venta de suplementos y mercancía del gimnasio. El cliente compra y paga en la app, y solo pasa por recepción a retirar su producto. Más ventas, menos filas.' 
+                    },
+                    { 
+                        name: 'Eventos Premium', 
+                        icon: 'fa-ticket-alt', 
+                        desc: 'Organiza seminarios, masterclasses o competencias internas pagas. Vende las entradas directamente desde la app y asegura el cupo lleno.' 
+                    }
+                ],
+                phoneContent: `
+                    <div class="h-full bg-zinc-900 pt-12 px-5 pb-5 overflow-y-auto hide-scroll flex flex-col">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-bold text-2xl text-white">Tienda Digital</h3>
+                            <div class="bg-zinc-800 px-3 py-1 rounded-full border border-zinc-700">
+                                <span class="text-xs text-gray-400">Saldo: <b class="text-white">450 pts</b></span>
+                            </div>
+                        </div>
+
+                        <!-- Hero Product -->
+                        <div class="relative h-64 bg-gradient-to-br from-blue-900 via-blue-800 to-black rounded-3xl p-6 flex flex-col justify-end border border-blue-700 mb-8 shadow-2xl group cursor-pointer overflow-hidden">
+                            <div class="absolute top-0 right-0 p-3">
+                                <span class="bg-yellow-500 text-black text-[10px] font-bold px-2 py-1 rounded shadow-lg uppercase">Más Vendido</span>
                             </div>
                             
-                            <div class="flex items-center gap-2 mb-2">
-                                <span class="text-xs text-gray-500 w-4">1</span>
-                                <input type="text" value="80kg" class="bg-black border border-zinc-700 text-white text-center text-xs rounded py-2 w-16">
-                                <input type="text" value="10" class="bg-black border border-zinc-700 text-white text-center text-xs rounded py-2 w-12">
-                                <button class="bg-green-600 text-white w-8 h-8 rounded-lg flex items-center justify-center shadow"><i class="fas fa-check text-xs"></i></button>
-                            </div>
-                             <div class="flex items-center gap-2">
-                                <span class="text-xs text-gray-500 w-4">2</span>
-                                <input type="text" placeholder="kg" class="bg-black border border-zinc-700 text-white text-center text-xs rounded py-2 w-16">
-                                <input type="text" placeholder="reps" class="bg-black border border-zinc-700 text-white text-center text-xs rounded py-2 w-12">
-                                <button class="bg-zinc-800 text-gray-500 w-8 h-8 rounded-lg flex items-center justify-center border border-zinc-700"><i class="fas fa-check text-xs"></i></button>
-                            </div>
-                        </div>
-
-                         <!-- Exercise 2 -->
-                        <div class="bg-zinc-900 p-4 rounded-2xl border border-zinc-800 opacity-75">
-                             <div class="flex justify-between items-start mb-1">
-                                <div>
-                                    <h4 class="font-bold text-white text-sm">Prensa 45°</h4>
-                                    <p class="text-[10px] text-gray-500">4 Series x 12 Reps</p>
+                            <div class="relative z-10">
+                                <h3 class="text-3xl font-black text-white leading-tight mb-2">Reto Abdomen <br>de Acero</h3>
+                                <p class="text-xs text-blue-200 mb-6">Coach Miguel • Guía PDF + Videos</p>
+                                
+                                <div class="flex justify-between items-center bg-black/40 backdrop-blur-md p-2 rounded-xl border border-white/10">
+                                    <span class="text-2xl font-bold text-white pl-3">$12.99</span>
+                                    <button class="bg-white text-blue-900 text-xs font-bold px-5 py-3 rounded-lg shadow hover:bg-gray-100 transition">Comprar Ahora</button>
                                 </div>
                             </div>
                         </div>
+
+                        <p class="text-xs font-bold text-gray-500 uppercase mb-4 px-1">Catálogo</p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-black p-4 rounded-2xl border border-zinc-800 hover:border-blue-500 transition cursor-pointer">
+                                <div class="h-24 bg-zinc-900 rounded-xl mb-3 flex items-center justify-center text-gray-600 text-3xl"><i class="fas fa-utensils"></i></div>
+                                <p class="text-xs font-bold text-white truncate mb-1">Recetario Keto</p>
+                                <p class="text-xs text-blue-400 font-bold">$8.00</p>
+                            </div>
+                            <div class="bg-black p-4 rounded-2xl border border-zinc-800 hover:border-blue-500 transition cursor-pointer">
+                                <div class="h-24 bg-zinc-900 rounded-xl mb-3 flex items-center justify-center text-gray-600 text-3xl"><i class="fas fa-video"></i></div>
+                                <p class="text-xs font-bold text-white truncate mb-1">Glúteos en Casa</p>
+                                <p class="text-xs text-blue-400 font-bold">$15.00</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
                 `
             },
-            comunidad: {
-                1: `
-                <div class="flex flex-col h-full animate-fade-in-up">
-                    <div class="bg-gradient-to-r from-red-900 to-black p-6 rounded-b-3xl mb-6 -mx-4 -mt-10 pt-16 border-b border-red-800 shadow-xl">
-                        <div class="flex justify-between items-end">
-                            <div>
-                                <p class="text-[10px] text-red-300 font-bold uppercase tracking-wider mb-1">Comunidad Privada</p>
-                                <h3 class="text-2xl font-black italic text-white">QBRFIT SOCIAL</h3>
-                            </div>
-                            <div class="bg-red-600/20 p-2 rounded-full border border-red-500/30">
-                                <i class="fas fa-users text-red-500"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Post -->
-                    <div class="bg-zinc-900 p-5 rounded-3xl border border-zinc-800 mb-5 shadow-lg">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center font-bold text-xs text-white shadow-lg">JC</div>
-                            <div>
-                                <p class="text-sm font-bold text-white">Juan Carlos</p>
-                                <p class="text-[10px] text-gray-500 flex items-center gap-1"><i class="far fa-clock"></i> Hace 2 horas</p>
-                            </div>
-                        </div>
-                        <p class="text-sm text-gray-300 mb-4 leading-relaxed">¡Rompí mi récord personal! 100kg en Sentadilla 🔥 Gracias coach <span class="text-blue-400">@Miguel</span> por el spot.</p>
-                        <div class="h-40 bg-black rounded-xl mb-4 flex items-center justify-center text-gray-600 border border-zinc-800 relative group cursor-pointer overflow-hidden">
-                            <div class="absolute inset-0 bg-zinc-800 opacity-50"></div>
-                            <i class="fas fa-play-circle text-4xl text-white z-10 group-hover:scale-110 transition"></i>
-                        </div>
-                        <div class="flex gap-6 border-t border-white/5 pt-3">
-                            <button class="text-red-500 text-xs font-bold flex items-center gap-2 hover:text-red-400 transition"><i class="fas fa-fire text-lg"></i> 24 Fuego</button>
-                            <button class="text-gray-400 text-xs flex items-center gap-2 hover:text-white transition"><i class="far fa-comment-alt text-lg"></i> 5 Coment.</button>
-                        </div>
-                    </div>
-                </div>
-                `,
-                2: `
-                <div class="flex flex-col h-full animate-fade-in-up">
-                     <div class="text-center mb-8 mt-6">
-                        <i class="fas fa-trophy text-5xl text-yellow-500 mb-3 drop-shadow-2xl animate-bounce"></i>
-                        <h3 class="font-black text-3xl italic text-white tracking-tighter">LIGA REGIONAL</h3>
-                        <p class="text-xs text-gray-400 uppercase tracking-widest mt-1">Compite por tu gimnasio</p>
-                    </div>
-
-                    <div class="bg-zinc-900 p-6 rounded-3xl border border-yellow-500/20 text-center mb-8 relative overflow-hidden shadow-2xl">
-                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-yellow-500 to-transparent"></div>
-                        <p class="text-[10px] text-gray-500 uppercase font-bold mb-2">Posición Actual</p>
-                        <p class="text-6xl font-black text-white mb-2 leading-none">#2</p>
-                        <p class="text-sm font-bold text-red-500 mb-4">QbrFit Quíbor</p>
-                        <div class="bg-black/50 rounded-full py-1.5 px-4 text-[10px] inline-block text-gray-300 border border-white/10">
-                            🚀 A solo 140 pts del 1ro
-                        </div>
-                    </div>
-
-                    <div class="space-y-3 px-2">
-                        <div class="flex items-center p-3 bg-zinc-900/50 rounded-2xl border border-zinc-800 opacity-60">
-                            <span class="font-bold text-gray-500 w-8 text-center">1</span>
-                            <div class="flex-1">
-                                <p class="text-xs font-bold text-white">Spartan Gym</p>
-                                <div class="w-full bg-zinc-800 h-1 mt-1 rounded-full"><div class="bg-gray-500 w-full h-1 rounded-full"></div></div>
-                            </div>
-                            <span class="text-xs font-bold text-yellow-500 ml-3">9.8k</span>
-                        </div>
-                         <div class="flex items-center p-4 bg-gradient-to-r from-red-900/20 to-black rounded-2xl border border-red-600 transform scale-105 shadow-xl relative z-10">
-                            <span class="font-bold text-white w-8 text-center text-lg">2</span>
-                            <div class="flex-1">
-                                <p class="text-sm font-bold text-white">Tu Gimnasio</p>
-                                <div class="w-full bg-zinc-800 h-1.5 mt-1 rounded-full"><div class="bg-red-600 w-[95%] h-1.5 rounded-full"></div></div>
-                            </div>
-                            <span class="text-sm font-bold text-white ml-3">9.6k</span>
-                        </div>
-                         <div class="flex items-center p-3 bg-zinc-900/50 rounded-2xl border border-zinc-800 opacity-60">
-                            <span class="font-bold text-gray-500 w-8 text-center">3</span>
-                            <div class="flex-1">
-                                <p class="text-xs font-bold text-white">Iron House</p>
-                                <div class="w-full bg-zinc-800 h-1 mt-1 rounded-full"><div class="bg-gray-500 w-[60%] h-1 rounded-full"></div></div>
-                            </div>
-                            <span class="text-xs font-bold text-gray-500 ml-3">6.2k</span>
-                        </div>
-                    </div>
-                </div>
-                `
-            },
-            experiencia: {
-                1: `
-                <div class="flex flex-col h-full animate-fade-in-up">
-                    <div class="text-center mb-6 mt-6 relative">
-                        <div class="absolute inset-0 bg-purple-500/20 blur-xl rounded-full"></div>
-                        <i class="fas fa-music text-4xl text-purple-500 mb-2 relative z-10"></i>
-                        <h3 class="font-bold text-2xl text-white relative z-10">Rockola Gym</h3>
-                        <p class="text-xs text-gray-400 relative z-10">Tú eliges qué suena</p>
-                    </div>
-
-                    <div class="bg-zinc-900 p-6 rounded-3xl border border-purple-500/30 text-center mb-6 shadow-2xl relative overflow-hidden">
-                         <div class="absolute top-0 right-0 p-3">
-                            <div class="w-2 h-2 bg-red-500 rounded-full animate-ping"></div>
-                        </div>
-                        <p class="text-[10px] text-purple-400 font-bold uppercase tracking-widest mb-4">Sonando Ahora</p>
-                        
-                        <div class="w-28 h-28 bg-black mx-auto rounded-2xl flex items-center justify-center mb-4 shadow-lg border border-zinc-800">
-                            <i class="fas fa-compact-disc text-zinc-700 text-5xl animate-spin-slow" style="animation-duration: 4s"></i>
-                        </div>
-                        
-                        <h3 class="text-white font-black text-2xl mb-1">Du Hast</h3>
-                        <p class="text-gray-400 text-sm mb-6">Rammstein</p>
-                        
-                        <div class="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden mb-2">
-                            <div class="bg-purple-500 w-2/3 h-full rounded-full"></div>
-                        </div>
-                        <div class="flex justify-between text-[10px] text-gray-500">
-                            <span>2:10</span>
-                            <span>3:54</span>
-                        </div>
-                    </div>
-
-                    <p class="text-xs font-bold text-gray-500 uppercase mb-3 px-2">Siguiente en la cola</p>
-                    <div class="bg-zinc-900 p-3 rounded-2xl border border-zinc-800 flex justify-between items-center mb-3">
-                        <div class="flex items-center gap-3">
-                            <div class="text-xs font-bold text-gray-500">1</div>
-                            <div>
-                                <p class="text-sm font-bold text-white">Bad Bunny</p>
-                                <p class="text-[10px] text-gray-500">Pedida por Jorge</p>
-                            </div>
-                        </div>
-                        <button class="bg-purple-600 text-white text-[10px] font-bold px-3 py-1.5 rounded-lg hover:bg-purple-500 transition shadow-lg shadow-purple-900/50">Votar (50pts)</button>
-                    </div>
-                </div>
-                `,
-                2: `
-                 <div class="flex flex-col h-full animate-fade-in-up justify-center items-center text-center">
-                    <div class="bg-zinc-900 p-8 rounded-full border-2 border-dashed border-zinc-700 mb-8 relative group cursor-pointer hover:border-purple-500 transition-all hover:bg-zinc-800">
-                        <i class="fas fa-qrcode text-5xl text-gray-500 group-hover:text-white transition-colors"></i>
-                        <p class="absolute -bottom-8 w-full left-0 text-xs text-gray-500">Toca para escanear</p>
-                    </div>
-                    
-                    <p class="text-gray-400 text-sm max-w-[200px] mb-8">
-                        Apunta tu cámara al código QR que está pegado en la máquina.
+            {
+                id: 'experiencia',
+                title: 'Experiencia Única',
+                subtitle: 'Música & Aprendizaje',
+                icon: 'fa-music',
+                color: 'purple',
+                story: `
+                    <p class="mb-4 text-gray-300">
+                        <strong class="text-white">Problema Real:</strong> Dos quejas eternas en todo gimnasio: "Esa música es horrible" y "No sé usar esa máquina y me da pena preguntar". Pequeñas fricciones que alejan al cliente.
                     </p>
-
-                    <!-- Result Simulation -->
-                    <div class="w-full bg-zinc-900 p-4 rounded-2xl border-l-4 border-blue-500 shadow-xl text-left flex gap-4 items-center animate-bounce-in">
-                        <div class="bg-black w-14 h-14 rounded-xl flex items-center justify-center border border-zinc-800">
-                            <i class="fas fa-dumbbell text-blue-500 text-2xl"></i>
-                        </div>
-                        <div>
-                            <p class="text-[10px] text-blue-400 font-bold uppercase tracking-wide">Máquina Detectada</p>
-                            <p class="font-bold text-white text-lg">Prensa de Piernas</p>
-                            <button class="text-xs text-gray-300 flex items-center gap-1 mt-1 hover:text-white"><i class="fas fa-play-circle"></i> Ver Tutorial (15s)</button>
-                        </div>
-                    </div>
-                </div>
-                `
-            },
-            ingresos: {
-                1: `
-                <div class="flex flex-col h-full animate-fade-in-up">
-                    <div class="flex justify-between items-center mb-6 mt-4">
-                        <h3 class="font-bold text-xl text-white">Tienda Digital</h3>
-                        <div class="bg-zinc-800 px-3 py-1 rounded-full border border-zinc-700">
-                            <span class="text-[10px] text-gray-400">Saldo: <b class="text-white">450 pts</b></span>
-                        </div>
-                    </div>
-
-                    <!-- Hero Product -->
-                    <div class="relative h-64 bg-gradient-to-b from-blue-900 to-black rounded-3xl p-6 flex flex-col justify-end border border-blue-800 mb-6 shadow-2xl group cursor-pointer overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=300&q=80" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay group-hover:scale-110 transition duration-700">
-                        
-                        <div class="absolute top-3 right-3 bg-yellow-500 text-black text-[8px] font-bold px-2 py-1 rounded shadow-lg">POPULAR</div>
-                        
-                        <h3 class="text-2xl font-black text-white leading-tight mb-1 relative z-10">Reto Abdomen <br>de Acero</h3>
-                        <p class="text-xs text-blue-200 mb-4 relative z-10">Coach Miguel • PDF + Video</p>
-                        
-                        <div class="flex justify-between items-center relative z-10 bg-black/50 p-1 rounded-xl backdrop-blur-sm border border-white/10">
-                            <span class="text-xl font-bold text-white pl-3">$12.99</span>
-                            <button class="bg-white text-black text-xs font-bold px-4 py-2 rounded-lg shadow hover:bg-blue-50 transition">Comprar</button>
-                        </div>
-                    </div>
-
-                    <p class="text-xs font-bold text-gray-500 uppercase mb-3 px-2">Más Vendidos</p>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-zinc-900 p-4 rounded-2xl border border-zinc-800 hover:border-blue-500 transition cursor-pointer flex flex-col items-center text-center">
-                            <div class="w-12 h-12 bg-zinc-800 rounded-full flex items-center justify-center text-gray-500 mb-2 border border-zinc-700"><i class="fas fa-book"></i></div>
-                            <p class="text-xs font-bold text-white mb-1">Recetas Keto</p>
-                            <p class="text-xs text-blue-400 font-bold">$8.00</p>
-                        </div>
-                        <div class="bg-zinc-900 p-4 rounded-2xl border border-zinc-800 hover:border-blue-500 transition cursor-pointer flex flex-col items-center text-center">
-                            <div class="w-12 h-12 bg-zinc-800 rounded-full flex items-center justify-center text-gray-500 mb-2 border border-zinc-700"><i class="fas fa-video"></i></div>
-                            <p class="text-xs font-bold text-white mb-1">Glúteos Pro</p>
-                            <p class="text-xs text-blue-400 font-bold">$15.00</p>
-                        </div>
-                    </div>
-                </div>
+                    <p class="mb-4 text-gray-300">
+                        <strong class="text-white">Solución QbrFit:</strong> Resolvemos esto con tecnología divertida.
+                        1. <strong class="text-purple-400">Rockola Colaborativa:</strong> Tus clientes usan sus puntos para poner la música que ELLOS quieren. Se acabó la pelea por el control del audio.
+                        2. <strong class="text-purple-400">Wiki QR:</strong> Pegamos un sticker en la máquina. El novato lo escanea y ¡Pum! Un video de 15 segundos le enseña a usarla.
+                    </p>
+                    <p class="text-purple-400 font-bold">Un gimnasio moderno, democrático y que se explica solo.</p>
                 `,
-                2: `
-                <div class="flex flex-col h-full animate-fade-in-up">
-                    <div class="flex justify-between items-center mb-6 mt-4">
-                        <h3 class="font-bold text-xl text-white">Eventos Especiales</h3>
-                        <i class="fas fa-star text-yellow-500 text-lg"></i>
-                    </div>
+                modules: [
+                    { 
+                        name: 'Rockola Social', 
+                        icon: 'fa-headphones-alt', 
+                        desc: 'Sistema de votación musical en tiempo real. Los usuarios gastan puntos para pedir canciones. Incluye filtros anti-géneros prohibidos configurables por el dueño.' 
+                    },
+                    { 
+                        name: 'Escáner de Equipos', 
+                        icon: 'fa-qrcode', 
+                        desc: 'Biblioteca de videos tutoriales vinculados a códigos QR físicos en tus máquinas. Reduce el miedo de los novatos y libera a tus entrenadores de explicar lo básico.' 
+                    },
+                    { 
+                        name: 'Club de Beneficios', 
+                        icon: 'fa-store-alt', 
+                        desc: 'Crea valor fuera del gym. Alianzas con comercios vecinos (Comida sana, Barbería, Tiendas). Muestra tu App y obtén descuentos exclusivos.' 
+                    }
+                ],
+                phoneContent: `
+                    <div class="h-full bg-zinc-900 pt-12 px-5 pb-5 overflow-y-auto hide-scroll flex flex-col">
+                        
+                        <!-- Rockola Widget -->
+                        <div class="bg-zinc-800 p-6 rounded-3xl border border-purple-500/30 text-center mb-8 shadow-2xl relative overflow-hidden">
+                             <div class="absolute top-0 right-0 p-4">
+                                <div class="w-3 h-3 bg-red-500 rounded-full animate-ping"></div>
+                            </div>
+                            <p class="text-[10px] text-purple-400 font-bold uppercase tracking-widest mb-6">Sonando Ahora</p>
+                            
+                            <div class="w-32 h-32 bg-black mx-auto rounded-full flex items-center justify-center mb-6 shadow-lg border-4 border-zinc-700 animate-[spin_10s_linear_infinite]">
+                                <i class="fas fa-compact-disc text-zinc-600 text-6xl"></i>
+                            </div>
+                            
+                            <h3 class="text-white font-black text-2xl mb-1 truncate">Du Hast</h3>
+                            <p class="text-gray-400 text-sm mb-6">Rammstein</p>
+                            
+                            <div class="w-full bg-zinc-900 h-2 rounded-full overflow-hidden mb-2">
+                                <div class="bg-purple-500 w-2/3 h-full rounded-full"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] text-gray-500 mb-6">
+                                <span>2:10</span>
+                                <span>3:54</span>
+                            </div>
 
-                    <div class="bg-zinc-900 rounded-3xl border border-zinc-800 overflow-hidden mb-6 shadow-xl">
-                        <div class="h-32 bg-red-900 relative">
-                             <div class="absolute inset-0 bg-black/20"></div>
-                             <div class="absolute bottom-3 left-3 bg-white text-black text-[10px] font-bold px-2 py-1 rounded">Sábado 10 AM</div>
-                        </div>
-                        <div class="p-5">
-                            <h3 class="font-bold text-white text-lg mb-2">Seminario de Nutrición</h3>
-                            <p class="text-xs text-gray-400 mb-4 leading-relaxed">Aprende a contar tus macros y diseñar tu dieta con la Nutri Ana. Incluye guía impresa.</p>
-                            <div class="flex justify-between items-center border-t border-zinc-800 pt-4">
-                                <div>
-                                    <p class="text-[10px] text-gray-500">Precio Miembro</p>
-                                    <p class="font-bold text-white text-lg">$20.00</p>
+                            <div class="bg-black/50 p-3 rounded-xl flex justify-between items-center border border-white/5">
+                                <div class="text-left pl-2">
+                                    <p class="text-xs text-gray-300 font-bold">Siguiente: Bad Bunny</p>
+                                    <p class="text-[10px] text-gray-500">Pedida por Jorge</p>
                                 </div>
-                                <button class="bg-red-600 text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-lg shadow-red-900/30 hover:bg-red-700 transition">Reservar</button>
+                                <button class="bg-purple-600 text-white text-[10px] font-bold px-4 py-2 rounded-lg hover:bg-purple-500 transition shadow-lg">Votar (50pts)</button>
+                            </div>
+                        </div>
+
+                        <!-- QR Feature -->
+                        <h3 class="font-bold text-white text-lg mb-4 ml-1">Herramientas</h3>
+                        <div class="bg-zinc-900 p-4 rounded-2xl border-l-4 border-blue-500 shadow-lg flex gap-4 items-center">
+                            <div class="bg-black w-14 h-14 rounded-xl flex items-center justify-center border border-zinc-800 text-2xl text-blue-500">
+                                <i class="fas fa-dumbbell"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-blue-400 font-bold uppercase tracking-wide">Máquina Escaneada</p>
+                                <p class="font-bold text-white text-lg">Prensa de Piernas</p>
+                                <button class="text-xs text-gray-300 flex items-center gap-1 mt-1 hover:text-white underline"><i class="fas fa-play-circle"></i> Ver Tutorial (15s)</button>
                             </div>
                         </div>
                     </div>
-
-                    <div class="bg-zinc-900 p-4 rounded-2xl border border-zinc-800 opacity-60 flex gap-4 items-center">
-                         <div class="w-12 h-12 bg-zinc-800 rounded-lg flex items-center justify-center text-gray-600"><i class="fas fa-spa"></i></div>
-                         <div class="flex-1">
-                            <h4 class="font-bold text-white text-sm">Masterclass Yoga</h4>
-                            <p class="text-[10px] text-gray-500">Domingo 9 AM • $15.00</p>
-                         </div>
-                         <span class="text-[10px] text-red-500 font-bold border border-red-900/30 px-2 py-1 rounded">Agotado</span>
-                    </div>
-                </div>
                 `
             },
-            futuro: {
-                1: `
-                <div class="flex flex-col h-full animate-fade-in-up relative">
-                    <div class="absolute inset-0 bg-indigo-500/5 pointer-events-none"></div>
-                    <div class="text-center mb-6 mt-4">
-                        <span class="bg-indigo-600 text-[8px] font-bold text-white px-2 py-1 rounded mb-2 inline-block tracking-widest">GEMINI VISION AI</span>
-                        <h3 class="font-bold text-xl text-white">NutriSnap</h3>
-                        <p class="text-xs text-gray-400">Tu cámara es tu nutricionista</p>
-                    </div>
-
-                    <div class="bg-zinc-900 p-5 rounded-3xl border border-indigo-500/30 shadow-2xl shadow-indigo-900/20 relative overflow-hidden mb-6">
-                        <!-- Simulated Camera View -->
-                        <div class="bg-black rounded-2xl h-48 mb-4 border border-zinc-700 flex items-center justify-center relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=300&q=80" class="absolute inset-0 w-full h-full object-cover opacity-50">
-                            <div class="absolute inset-4 border-2 border-indigo-400 rounded-xl animate-pulse">
-                                <div class="absolute top-0 left-0 w-2 h-2 bg-indigo-400"></div>
-                                <div class="absolute top-0 right-0 w-2 h-2 bg-indigo-400"></div>
-                                <div class="absolute bottom-0 left-0 w-2 h-2 bg-indigo-400"></div>
-                                <div class="absolute bottom-0 right-0 w-2 h-2 bg-indigo-400"></div>
-                            </div>
-                            <div class="absolute bottom-3 left-3 bg-black/80 text-indigo-400 text-[10px] px-3 py-1.5 rounded-full backdrop-blur border border-indigo-500/30 font-bold flex items-center gap-2">
-                                <i class="fas fa-sparkles"></i> Analizando comida...
-                            </div>
-                        </div>
-
-                        <div class="space-y-3">
-                            <div class="flex justify-between items-center border-b border-white/5 pb-2">
-                                <span class="text-sm text-white font-medium">Pollo a la Plancha</span>
-                                <span class="text-xs font-bold text-indigo-400 bg-indigo-900/20 px-2 py-0.5 rounded">25g Prot</span>
-                            </div>
-                             <div class="flex justify-between items-center border-b border-white/5 pb-2">
-                                <span class="text-sm text-white font-medium">Arroz Blanco</span>
-                                <span class="text-xs font-bold text-indigo-400 bg-indigo-900/20 px-2 py-0.5 rounded">40g Carbs</span>
-                            </div>
-                             <div class="flex justify-between items-center pt-1">
-                                <span class="text-sm font-bold text-white">Total Calorías</span>
-                                <span class="text-lg font-black text-green-400">450 kcal</span>
-                            </div>
-                        </div>
-                        <button class="w-full bg-indigo-600 text-white text-xs font-bold py-3 rounded-xl mt-5 hover:bg-indigo-700 transition shadow-lg shadow-indigo-900/30">Registrar en mi Diario</button>
-                    </div>
-                </div>
+            {
+                id: 'ia',
+                title: 'Inteligencia Artificial',
+                subtitle: 'Potenciado por Gemini',
+                icon: 'fa-brain',
+                color: 'indigo',
+                story: `
+                    <p class="mb-4 text-gray-300">
+                        <strong class="text-white">La Historia:</strong> ¿Cómo sabes cuándo un cliente está a punto de cancelar? Normalmente, te enteras cuando ya se fue y dejó de pagar.
+                    </p>
+                    <p class="mb-4 text-gray-300">
+                        <strong class="text-white">Con QbrFit AI:</strong> Integramos Google Gemini. El sistema analiza patrones y te avisa: <em>"Alerta: Pedro bajó su asistencia un 80% este mes"</em>. 
+                        Y lo mejor: <strong>La IA redacta por ti</strong> un mensaje de WhatsApp personalizado para recuperarlo.
+                        Además, tus clientes pueden tomarle una foto a su almuerzo y la IA calcula las calorías al instante. 
+                    </p>
+                    <p class="text-indigo-400 font-bold">Tecnología del futuro para blindar tu negocio hoy.</p>
                 `,
-                2: `
-                 <div class="flex flex-col h-full animate-fade-in-up relative">
-                    <div class="bg-zinc-900 border-b border-zinc-800 p-4 -mx-4 -mt-10 pt-14 mb-6 shadow-xl z-10">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <h3 class="font-bold text-lg text-white flex items-center gap-2"><i class="fas fa-robot text-purple-500"></i> Oráculo IA</h3>
-                                <p class="text-[10px] text-gray-500 uppercase tracking-wider">Panel del Dueño</p>
-                            </div>
-                            <div class="w-2 h-2 bg-red-500 rounded-full animate-ping"></div>
-                        </div>
-                    </div>
+                modules: [
+                    { 
+                        name: 'NutriSnap (Visión)', 
+                        icon: 'fa-camera', 
+                        desc: 'Reconocimiento de alimentos por foto. El usuario sube foto del plato, la IA detecta ingredientes y macros. Facilita la dieta y retiene al usuario.' 
+                    },
+                    { 
+                        name: 'Oráculo de Retención', 
+                        icon: 'fa-crystal-ball', 
+                        desc: 'Algoritmo predictivo que detecta usuarios en riesgo de abandono (Churn) antes de que suceda. Te da la oportunidad de actuar antes de perder al cliente.' 
+                    },
+                    { 
+                        name: 'Redactor Inteligente', 
+                        icon: 'fa-magic', 
+                        desc: 'Generación automática de mensajes de venta, recuperación o felicitación con tono persuasivo y amigable. Ahorra tiempo de redacción.' 
+                    }
+                ],
+                phoneContent: `
+                    <div class="h-full bg-zinc-900 pt-12 px-5 pb-5 overflow-y-auto hide-scroll flex flex-col relative">
+                        <!-- AI Overlay BG -->
+                        <div class="absolute inset-0 bg-indigo-500/5 pointer-events-none"></div>
 
-                    <div class="bg-gradient-to-br from-red-900/20 to-zinc-900 border border-red-500/30 p-5 rounded-3xl mb-4 relative overflow-hidden">
-                         <div class="absolute -right-4 -top-4 w-20 h-20 bg-red-600/10 rounded-full blur-xl"></div>
-                        
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="text-[10px] font-black text-red-400 uppercase tracking-widest border border-red-500/30 px-2 py-1 rounded">RIESGO DETECTADO</span>
-                            <i class="fas fa-exclamation-triangle text-red-500"></i>
+                        <div class="text-center mb-6">
+                            <span class="bg-indigo-600 text-[10px] font-bold text-white px-3 py-1 rounded-full mb-2 inline-block tracking-widest border border-indigo-400 shadow shadow-indigo-500/50">GEMINI VISION AI</span>
+                            <h3 class="font-bold text-xl text-white">NutriSnap</h3>
                         </div>
-                        
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center font-bold text-gray-400 border border-zinc-700 text-lg">PP</div>
-                            <div>
-                                <p class="font-bold text-white text-lg">Pedro Perez</p>
-                                <p class="text-xs text-red-300"><i class="fas fa-chart-down mr-1"></i>Asistencia bajó 80%</p>
+
+                        <!-- Vision Feature -->
+                        <div class="bg-zinc-900 p-5 rounded-3xl border border-indigo-500/40 shadow-2xl shadow-indigo-900/20 relative overflow-hidden mb-8">
+                            
+                            <!-- Fake Camera -->
+                            <div class="bg-black rounded-2xl h-48 mb-4 border border-zinc-700 flex items-center justify-center relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60">
+                                
+                                <!-- Scanning Effect -->
+                                <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/0 via-indigo-500/20 to-indigo-500/0 h-full w-full animate-[scan_2s_linear_infinite]"></div>
+                                
+                                <div class="absolute bottom-3 left-3 bg-black/80 text-indigo-400 text-[10px] px-3 py-1.5 rounded-full backdrop-blur border border-indigo-500/30 font-bold flex items-center gap-2">
+                                    <i class="fas fa-sparkles"></i> Analizando...
+                                </div>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center border-b border-white/5 pb-2">
+                                    <span class="text-sm text-white font-medium">Pollo a la Plancha</span>
+                                    <span class="text-xs font-bold text-indigo-300 bg-indigo-900/40 px-2 py-0.5 rounded">25g Prot</span>
+                                </div>
+                                 <div class="flex justify-between items-center border-b border-white/5 pb-2">
+                                    <span class="text-sm text-white font-medium">Arroz Blanco</span>
+                                    <span class="text-xs font-bold text-indigo-300 bg-indigo-900/40 px-2 py-0.5 rounded">40g Carbs</span>
+                                </div>
+                                 <div class="flex justify-between items-center pt-1">
+                                    <span class="text-sm font-bold text-white">Total Calorías</span>
+                                    <span class="text-xl font-black text-green-400">450 kcal</span>
+                                </div>
+                            </div>
+                            <button class="w-full bg-indigo-600 text-white text-xs font-bold py-3 rounded-xl mt-5 hover:bg-indigo-700 transition shadow-lg">Registrar Comida</button>
+                        </div>
+
+                        <!-- Churn Alert Mini -->
+                        <div class="bg-red-900/20 border border-red-500/30 p-4 rounded-2xl relative">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center font-bold text-gray-400 border border-zinc-700">PP</div>
+                                <div>
+                                    <p class="font-bold text-white text-sm">Alerta Dueño</p>
+                                    <p class="text-[10px] text-red-300">Pedro Perez: Riesgo Alto</p>
+                                </div>
+                            </div>
+                            <div class="bg-black/60 p-2 rounded-lg border border-white/5">
+                                <p class="text-[10px] text-gray-400 italic">"Hola Pedro, te extrañamos..." <span class="text-indigo-400 font-bold not-italic ml-1">IA redactó esto.</span></p>
                             </div>
                         </div>
-                        
-                        <!-- AI Suggestion -->
-                        <div class="bg-black/60 p-4 rounded-xl border border-purple-500/30 relative backdrop-blur-sm">
-                            <div class="absolute -top-3 left-4 text-purple-300 text-[10px] bg-zinc-900 px-2 py-0.5 rounded border border-purple-500/30 font-bold shadow"><i class="fas fa-magic mr-1"></i>Sugerencia Gemini</div>
-                            <p class="text-xs text-gray-300 italic mb-4 leading-relaxed mt-1">
-                                "Hola Pedro, te extrañamos en el rack de sentadillas. 💪 Te regalo un batido pre-entreno si vienes antes del viernes. ¿Te animas?"
-                            </p>
-                            <button class="w-full bg-green-600 text-white text-xs font-bold py-3 rounded-lg hover:bg-green-700 flex items-center justify-center gap-2 shadow-lg shadow-green-900/30 transition transform hover:scale-105">
-                                <i class="fab fa-whatsapp text-lg"></i> Enviar Mensaje (1-Clic)
-                            </button>
-                        </div>
                     </div>
-                </div>
                 `
             }
-        };
+        ];
 
-        // Función para inyectar HTML en los celulares
-        function updatePhone(sectionId, exampleId) {
-            const screen = document.getElementById(`screen-${sectionId}`);
-            if (screen && screens[sectionId][exampleId]) {
-                // Efecto de transición
-                screen.style.opacity = '0';
-                screen.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    screen.innerHTML = screens[sectionId][exampleId];
-                    screen.style.opacity = '1';
-                    screen.style.transform = 'scale(1)';
-                }, 200);
+        let currentStep = 0;
+
+        function nextStep() {
+            if (currentStep === 0) {
+                // Ocultar Intro
+                document.getElementById('step-0').style.display = 'none';
+                renderStep(0); // Render first module
+            } else if (currentStep <= steps.length) {
+                renderStep(currentStep);
             }
         }
 
-        // Cargar contenido inicial
-        window.onload = () => {
-            updatePhone('gestion', 1);
-            updatePhone('entrenamiento', 1);
-            updatePhone('comunidad', 1);
-            updatePhone('experiencia', 1);
-            updatePhone('ingresos', 1);
-            updatePhone('futuro', 1);
-        };
-        
-        // Animaciones al hacer scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in-up');
-                    entry.target.style.opacity = 1;
-                }
-            });
-        }, { threshold: 0.1 });
+        function prevStep(index) {
+            if (index === 0) {
+                // Volver a Intro
+                document.getElementById('dynamic-container').innerHTML = '';
+                document.getElementById('step-0').style.display = 'flex';
+                currentStep = 0;
+            } else {
+                renderStep(index - 1);
+            }
+        }
 
-        // Activamos scroll smooth en enlaces internos
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+        function renderStep(index) {
+            currentStep = index + 1; // Ajuste para lógica de contador
+            const step = steps[index];
+            const isLast = index === steps.length - 1;
+
+            const html = `
+            <section class="min-h-screen py-8 md:py-20 px-6 flex flex-col justify-center bg-black section-separator slide-in">
+                <div class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center">
+                    
+                    <!-- COLUMNA CELULAR (Orden cambia según pantalla) -->
+                    <!-- En móvil: order-2 (abajo). En PC: order-1 (izquierda) -->
+                    <div class="order-2 md:order-1 flex justify-center w-full">
+                        <div class="iphone-mockup border-zinc-800 shadow-${step.color}-900/20">
+                            <div class="iphone-notch"></div>
+                            ${step.phoneContent}
+                        </div>
+                    </div>
+
+                    <!-- COLUMNA TEXTO (Orden cambia según pantalla) -->
+                    <!-- En móvil: order-1 (arriba). En PC: order-2 (derecha) -->
+                    <div class="order-1 md:order-2">
+                        <div class="w-16 h-16 bg-zinc-900 rounded-2xl flex items-center justify-center text-${step.color}-500 text-3xl mb-6 border border-zinc-800 shadow-lg shadow-${step.color}-900/10">
+                            <i class="fas ${step.icon}"></i>
+                        </div>
+                        
+                        <h2 class="text-3xl md:text-5xl font-black mb-2 text-white">${step.title}</h2>
+                        <p class="text-xl text-${step.color}-500 font-bold mb-6 tracking-wide">${step.subtitle}</p>
+                        
+                        <div class="prose prose-invert mb-8 text-lg leading-relaxed bg-zinc-900/30 p-6 rounded-2xl border border-zinc-800">
+                            ${step.story}
+                        </div>
+
+                        <div class="mb-10">
+                            <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4 border-b border-zinc-800 pb-2">Módulos Incluidos (Toca para ver detalles)</h4>
+                            <div class="grid gap-3">
+                                ${step.modules.map(mod => `
+                                    <button onclick="openModal('${mod.name}', '${mod.desc}', '${step.icon}', '${step.color}')" class="text-left w-full p-4 bg-zinc-900 rounded-xl border border-zinc-700 hover:border-${step.color}-500 hover:bg-zinc-800 transition flex items-center gap-4 group">
+                                        <div class="w-10 h-10 rounded-lg bg-black flex items-center justify-center text-${step.color}-500 group-hover:scale-110 transition shrink-0">
+                                            <i class="fas ${mod.icon}"></i>
+                                        </div>
+                                        <div>
+                                            <span class="block font-bold text-white group-hover:text-${step.color}-400 transition">${mod.name}</span>
+                                            <span class="text-xs text-gray-500">Ver cómo funciona <i class="fas fa-chevron-right text-[10px] ml-1"></i></span>
+                                        </div>
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <!-- Botones de Navegación -->
+                        <div class="flex gap-4 border-t border-zinc-800 pt-6">
+                            <button onclick="prevStep(${index})" class="flex-1 bg-zinc-800 text-white font-bold py-4 rounded-xl hover:bg-zinc-700 transition flex items-center justify-center gap-2">
+                                <i class="fas fa-arrow-left"></i> Anterior
+                            </button>
+                            
+                            ${!isLast ? `
+                            <button onclick="renderStep(${index + 1})" class="flex-1 bg-white text-black font-bold py-4 rounded-xl hover:bg-gray-200 transition flex items-center justify-center gap-2 shadow-lg">
+                                Siguiente <i class="fas fa-arrow-right"></i>
+                            </button>` : `
+                            <button onclick="finishPresentation()" class="flex-1 bg-green-600 text-white font-bold py-4 rounded-xl hover:bg-green-700 transition flex items-center justify-center gap-2 shadow-lg shadow-green-900/50 animate-pulse">
+                                ¡Quiero esta App! <i class="fas fa-check"></i>
+                            </button>`}
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            `;
+            
+            const container = document.getElementById('dynamic-container');
+            container.innerHTML = html;
+            window.scrollTo(0,0);
+        }
+
+        function finishPresentation() {
+            const container = document.getElementById('dynamic-container');
+            container.innerHTML = `
+            <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 section-separator relative bg-black">
+                <div class="max-w-2xl mx-auto">
+                    <div class="w-24 h-24 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-green-900/50">
+                        <i class="fas fa-check text-5xl text-white"></i>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-black mb-6 text-white leading-tight">Excelente Decisión</h2>
+                    <p class="text-gray-400 mb-10 text-lg">
+                        Estás a un paso de modernizar tu gimnasio. Habla con nosotros para agendar una instalación.
+                    </p>
+                    <div class="flex flex-col gap-4">
+                        <a href="https://wa.me/?text=Hola,%20vi%20la%20demo%20de%20QbrFit%20y%20quiero%20más%20info" target="_blank" class="bg-green-600 text-white font-bold py-4 px-12 rounded-full hover:bg-green-700 transition transform hover:scale-105 shadow-xl flex items-center justify-center gap-2">
+                            <i class="fab fa-whatsapp text-xl"></i> Contactar por WhatsApp
+                        </a>
+                        <button onclick="location.reload()" class="text-gray-500 hover:text-white underline">Volver al Inicio</button>
+                    </div>
+                </div>
+            </section>
+            `;
+            window.scrollTo(0,0);
+        }
+
+        // --- MODAL LOGIC ---
+        function openModal(title, desc, iconClass, color) {
+            const modal = document.getElementById('info-modal');
+            const titleEl = document.getElementById('modal-title');
+            const bodyEl = document.getElementById('modal-body');
+            const iconContainer = document.getElementById('modal-icon');
+            
+            titleEl.innerText = title;
+            bodyEl.innerText = desc;
+            
+            iconContainer.className = `w-14 h-14 rounded-2xl flex items-center justify-center text-3xl bg-zinc-800 text-${color}-500 border border-zinc-700 shadow-lg`;
+            iconContainer.innerHTML = `<i class="fas ${iconClass}"></i>`;
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('info-modal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Cerrar modal al hacer click afuera
+        document.getElementById('info-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
         });
 
     </script>
